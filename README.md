@@ -1,124 +1,42 @@
-# Part 1: Questions and Answers:
-1. Various approaches to storage management on your platform of choice:
-* I am working on cross-platform app with *React Native*. 
-* Below is a list of ways to handle data or files for *React Native* apps.
+# Part 1: Document
+### Q1: The various states that an app can enter on your platform of choice.
+I am developing a cross-platform app, which will be on both iOS and android platform.
 
-    **1) Key-Value Pair Storage:** Often, while creating settings options, it can be useful to store a simple key/value pairings of serializable data (like *JSON*). In the web world, we'd use *localStorage*. Ideally, we'd like a simple data storage for string-based data that has a *get*, a *set*, and a *clear* method to handle data for us. *react-native-default-preference* is an easy-to-add dependency that provides what we're looking for. Under-the-hood, it utilized native methods for storing data in a key-value manner. These APIs it employs is the *SharedPreferences API* on *Android* and the *UserDefaults API* on *iOS*. This native code utilization should mean that not only is the data straightforward to access, but speedy as well. Such an conventional way of storing data can be easily accessed from external sources, which will lead to a security vulnerability with sensitive data. 
+1. **Various states that an app enter on iOS platform:**
 
-    **2) Secure Key-Value Pair Storage:** In case that we want to store a part of secure information or sensitive data to the device, for example, an access token from the *GitHub API*, then *Secure Key-Value Pair Storage* is needed. Both major mobile platforms have solution for *Secure Key-Value Pair Storage*: *iOS* has its *Keychain API* while *Android* provides a *KeyStore API*. Both can be accessed using the *react-native-secure-key-store npm* package.
+    In iOS 13 and later, the app needs to respond to scene-based life-cycle events. A scene represents one instance of the app’s UI running on a device. The user can create multiple scenes for each app, and show and hide them separately. Because each scene has its own life cycle, each can be in a different state of execution. For example, one scene might be in the foreground while others are in the background or are suspended.
 
-    **3) AsyncStorage:** is the most common method for data persistence in React Native. It's presents asynchronous, unencrypted, persistent, key-value storage system. In other words, AsyncStorage stores data as simple strings and should never be used for storing sensitive informations AsyncStorage is the most recommended way to persist data in *React Native* apps as it is already built into *React Native*. Storage stays local to the device like in browser or mobile’s native storage location. The storage is deleted when We clean device’s storage or browser’s storage. Data available locally is unencrypted but we can apply some security options. It should be use as part of your device’s backups and persists during upgrades.
+    A scene can be in one of these states:
+    - *Unattached*: The scene always starts in the unattached state. It has two routes from here. If requested by a user, it goes into the foreground state. If requested by the system, it stays in the background to process an event. The system may detach the scene from the background or suspended states at any time to reclaim its resources.
+    - *Suspended*: In the suspended state the scene is not performing any work and can be considered sleeping. The scene may be detached or woken up from this state. When woken up, the scene moves into the background to process certain tasks. The system may suspend the scene at any time when it’s in the background.
+    - *Background*: In the background state the scene is not visible to the user and is limited in tasks it’s allowed to perform. From the background state the scene may take 3 different routes: become unattached, become suspended and move to the foreground.
+    - *Foreground Active or Inactive*:In the foreground state the scene is presented to the user. It has two sub-states: active and inactive. The scene is processing system and user interaction events when it’s foreground-active. The scene may become inactive when it’s interrupted, e.g. by a phone call, or because it is transitioning to or from the background. When foreground-inactive, the scene is not receiving system and user interaction events.
 
-    **4) SQLite:** When *key-value storage* is not enough, we may need the power and flexibility that a full-scale database provides. This instance is where having a local *SQL* database comes into play. *React Native* has a few different options for utilizing an on-device *SQL* database, but the most popular is using the *react-native-sqlite-storage* package and manage the database within the app. *SQLite* can be integrated with mobile apps to directly access and perform database operations.
+2. **Various states that an app enter on Android platform:**
 
-    **5) SQLite with ORM Option:** If we want the power and utility of a *SQL* database, but don't want to play with any of the *SQL* syntaxes by ourselves, then there is a myriad of options to build on top of *SQLite* using *React Native*. One option is *TypeORM*, which is useful for both *TypeScript* and *vanilla JS* usage, and provides a bunch of functionality that maps relatively directly to SQL. Alternatively, we can use WatermelonDB which is more of a framework feel, and utilized with RxJS to provide an event-based fast-as-fusion alternative to more conventional ORMs.
-
-    **6) Firebase:** It is a popular service provided by Google that supports a real-time *NoSQL* cloud database for *React Native*. Cloud Storage for Firebase stores app files in a Google Cloud Storage bucket, making them accessible through both Firebase and Google Cloud. It allows seamless data synchronization and offline data modification with just a few lines of code. If the application is more into offline data updating and data synchronization, then *Firebase* will suit it best. Firebase can significantly manage MVC-based *React Native* apps that have high data requirements. Moreover, Firebase gives developers full access to data removal from the Google server whenever required.
-
-    **7) MongoDB:** *MongoDB* is an open-source *NoSQL* database built for scalability and complex applications. *MongoDB* follows a combined logic of using key-value stores and a relational database to store data objects in *JSON* documents with dynamic schemas. Even when managing large amounts of data and objects, *MongoDB* allows modification of the schema without affecting the React Native application’s performance or behavior at runtime. Being a *NoSQL* database, it uses a simple *JavaScript* interface to query instead of *SQL* statements. We can simply pass a *JavaScript* object that partially describes the search target, and *MongoDB* will return the value.
-
-    **8) Realm:** Realm Database was built for offline-first and real-time applications. Realm has its own database engine and does not just rely on key-value pairs. It is not just another ORM or SQL wrapper. Developers prefer to use Realm to handle large amounts of data as well as for high-performance applications. Realm allows developers to frequently undergo mapping classes, tables, foreign keys and the fields. Realm is an object-oriented database. The object-oriented model makes it 10x faster and saves We from having to run tons of queries, unlike typical relational or SQL databases.
-
-    **9) Files storage library:** This is about some of the features available in React Native to store and retrieve files. 
-    - Every app has its own storage, that other apps do not have access to, which is known as internal storage. *react-native-fs* library is the perfect tool to handle files in internal storage and move files from local storage to external storage. *react-native-document-picker* package is the tool to move file from internal storage to external storage. 
+    The Activity class is a crucial component of an Android app. The Android system initiates code in an Activity instance by invoking specific callback methods that correspond to specific stages of its lifecycle. Activity states include *Resumed*, *Started*, *Paused*,*Stopped*,*Destroyed*.
+    - When final Activity state is *Resumed*, then process state is *Foreground*. The Activity in this state is visible to the user and the user is able to interact with it. Android Runtime treats the Activity in this state with the highest priority and never tries to kill it.
+    - When final Activity state is *Started/Paused*, then process state is *Visible (no focus)*. When an Activity is in Started states, the Activity is not yet rendered on screen but is about to become visible to the user. When an Activity is in Paused states, the user can still see the Activity in the background such as behind a transparent window or a dialog box i.e it is partially visible. The user cannot interact with the Activity in Started or Paused states until the Activity changes to Resumed state. Android Runtime usually does not kill an Activity in Started/Paused states but may do so in an extreme case of resource crunch.
+    - When final Activity state is *Stopped*, then process state is *Background (Invisible)*. From the active state, when a new Activity is started on top of the current one or when a user hits the Home key, the Activity goes to the background and changes to Stopped state. The Activity in this state is invisible, but it is not destroyed. Android Runtime may kill such an Activity in case of resource crunch.
+    - When final Activity state is *Destroyed*, then process state is *Empty*. When a user hits a Back key or Android Runtime decides to reclaim the memory allocated to an Activity i.e in the paused or stopped state, It goes into the Destroyed state. The Activity is out of the memory and it is invisible to the user.
 
 
-2. Pros/cons of each approach for your project:
-    
-    **1) Key-Value Pair Storage:**
-    * Pros:
-        * Simple data format makes write and read operations extremely fast.
-        * Value can be anything, including JSON, flexible schemas.
-    * Cons:
-        * Optimized only for data with single key and value. A parser is required to store multiple values.
-        * Not optimized for lookup. Lookup requires scanning the whole collection or creating separate index values.
-        * Not secure, cannot handle sensitive date.
+### Q2: The various states that you must consider for your app, why you must consider it, and what must happen in each state.
+The various states that my app must consider are as below: 
+1. *Active state* - iOS scene state is Foreground Active and Android Activity state is Resumed. My app at this state is running in the foreground and fully visible, and users can see it and interact with it and it will respond to users right away. I need to consider this state, because this is the state when user can interact with the app benefit from using it. The app in this state should create its user interface, must be visible to user, listen to user interaction events and respond to user right awary. 
 
-    **2) Secure Key-Value Storage:**
-    * Pros:
-        * Simple data format makes write and read operations extremely fast
-        * Value can be anything, including JSON, flexible schemas
-        * A secure method of data storing.
-    * Cons
-        * Optimized only for data with single key and value. A parser is required to store multiple values.
-        * Not optimized for lookup. Lookup requires scanning the whole collection or creating separate index values.
-    
-    **3) AsyncStorage:** 
-    * Pros:
-        * Alleviates some of the need to rely on Server and External DB.
-        * Readily-available and simple one-liner implementation.
-        * Does not delay the loading of the app and can be quicker than data-fetching.
-        * MVP Considerations — Possibly a simple solution for MVP/POC product — that could serve until switching to production-ready solution.
-    * Cons:
-        * Silently reaches storage size limit of 6MB. Is 6MB plenty for the needs of the app?
-        * The 6MB storage can be wiped clean in the case of low memory on device.
-        * The storage is deleted when we clean device’s storage or browser’s storage.
-        * Requires data type conversion as it holds only strings data.
-        * Requires serialisation/deserialisation and content-security-policies in place to maintain safety of data.
+2. *Inactive or paused state* - iOS scene state is Foreground inactive and Android Activity state is Paused and can be seen in background. The iOS scene or Android Activity may become inactive when it’s interrupted, e.g. by a phone call, or because it is transitioning to or from the background. In this state, the iOS scene or Android Activity is not receiving user interaction events. I need to consider this state, because when there's interuptions like a phone call, the app needs step behind and let the phone call go on first. The app in this state must be paused and must not receive or respond to any user interaction events. 
 
-    **4) SQLite without ORM:**	
-    * Pros:
-        * It cleanly separates data.
-
-    * Cons
-        * Difficult to maintain code and table migrations manually.
-        * Not very fast compared to key-value pairs.
-
-    **5) SQLite with ORM Option:**
-    * Pros:
-        * It cleanly separates data.
-        * Much more easy to maintain than writing SQL itself.
-    * Cons:
-        * Often slower than writing SQL by hand.
-        * More work to get setup.
-
-    **6) Firebase:**
-    * Pros:
-        * If the app runs on a centralized database and is updated by a lot of users, then it's more than capable of handling the real-time data updates between devices.
-        * Stored in the cloud; so readily available everywhere.
-        * *JSON (JavaScript Object Notation)* storage means no barrier between data and objects.
-        * Cross-Platform API (If We are using this DB with an app).
-        * Hosting is taken care by firebase reducing the hardware maintenance cost.
-         Minimal setup, easy access to data, files, auth and more.
-    * Cons:
-        * Storage format is entirely different from SQL (Firebase uses JSON). Hence, migration presents a difficult challenge.
-        * Unless the app runs on one centralized database updated by a vast quantity of users, it's an overkill. It is limited to 100 connections, 1GB of storage and 10 GB/month download. It also supports more connections and data storage in a subscription model, which is a paid service.
-
-    **7) MongoDB:** 
-    * Pros:
-        * The database is highly flexible.
-        * It can be distributed amongst multiple databases.
-        * It is really fast and great for scalability.
-        * It is easy to set up and implement.
-    * Cons:
-        * The database takes up a ton of memory.
-        * It has a document size limit of 16 MB.
-        * It has limitations of nesting to 100 levels.
-        * There is a limit of 20,000 to your max connection number. 
-
-    **8) Realm:**
-    * Pros:
-        * Performance is faster than SQLite and Core Data.
-        * Minimal code is required to handle all the work.
-        * Consistent speed and performance irrespective of large data sets and enormous storage.
-        * No limit to data storage.
-        * Scalable and works with large data in no time.
-        * Good Documentation & Support.
-        * Realm is completely free.
-    * Cons:
-        * Consumes more memory and space as compared to SQLite.
-        * It’s not a native framework.
+3. *Background or stopped state* - iOS scene state is Background and Android Activity state is Stopped and Android process state is Background/Invisible. The app in this state is running in the background. The user is either in another app, or on the home screen, or if on Android platform on another Activity. I need to consider this state, because even though the app in this state is not visible to the user, it still can perform tasks it is allowed to perform in the background, such as updating the local database regularly by loading contents from remote database in the background. Doing tasks in the background is important towards the performance of the app and good user experience. The app in this state must be invisible to users, and must not receive or respond to any user interaction events. But it can perform some tasks that it is allowed to perform in the background.
 
 
-# Part 2: App that demonstrates:
-1. After clicking 'Sign Up' button, users should 1) key in email address and password, and 2) upload a portrait picture. Then the app will store user account information and user uploaded picture locally. 
-2. The app will show the dashboard with 'Logout' button. Upon clicking the 'Logout' button, we will go back to the login page.
-3. At the login page, users can key in email address and password, then the app will show the portrait picture in accordance with the email address and allow user to login their accout if ther password is correct.
+# Part 2: App that demonstrates tombstone management
+- **Demo:**
 
+- <img alt="demo" src="./assets/HW3Demo.gif">
 
-## Demo
-<img alt="demo" src="./assets/Demo.gif">
-
+1. When user key in email address or password, and then go away and enter another app, then come back to this app, the app is at the same state as when the user left the app without exiting the app. The information keyed in by user is still there, the same as when the user left this app.
+2. When user viewing dashboard, and  then go away and enter another app, then come back to this app, the app is still at the dashboard screen as when the user left the app without exiting the app.
 
 ## Language and Dev Platform
 - **Language**: React Native
@@ -138,10 +56,9 @@
     - press `i`
     - wait for ios simulater to start and install this app
 
-
-
 # Reference:
-1. https://plainenglish.io/blog/trending-storage-options-for-react-native-developers-8671fbffb686
-2. https://unicorn-utterances.com/posts/data-storage-options-in-react-native
-3. https://blog.codemagic.io/choosing-the-right-database-for-react-native-app/
-4. https://www.mindinventory.com/blog/top-react-native-databases/
+1. https://reactnative.dev/docs/appstate#currentstate
+2. https://developer.apple.com/documentation/uikit/app_and_environment/managing_your_app_s_life_cycle
+3. https://developer.android.com/guide/components/activities/Activity-lifecycle#asem
+4. https://www.vadimbulavin.com/ios-13-ipados-app-life-cycle-with-uiscene-scene-session-and-scene-delegate/
+
