@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Image, StyleSheet, Text, Linking} from 'react-native';
 import Badge from '../components/Badge';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Card = props => {
   // console.log('card props= ', props);
@@ -10,6 +11,7 @@ const Card = props => {
     Linking.openURL(wikipedia);
     // console.log('profile URL= ', wikipedia);
   };
+
 
   return (
     <View style={styles.parentContainer}>
@@ -34,31 +36,31 @@ const Card = props => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   parentContainer: {
-    marginHorizontal: 12,
-    marginVertical: 6,
+    marginHorizontal: '1rem',
+    marginVertical: '1rem',
     backgroundColor: '#BFDFFC',
     flexDirection: 'row',
-    borderRadius: 8,
-    elevation: 4,
+    borderRadius: '1rem',
+    elevation: '0.5rem',
   },
   nameContainer: {
     flexDirection: 'column',
     flexShrink: 1,
   },
   profileImage: {
-    width: 60,
-    height: 60,
-    margin: 16,
-    borderRadius: 80 / 2,
-    borderWidth: 1,
+    width: '1rem',
+    height: '1rem',
+    margin: '1rem',
+    borderRadius: '1rem',
+    borderWidth: '0.1rem',
     borderColor: '#b3b3b3',
   },
   name: {
-    fontWeight: '600',
-    fontSize: 18,
-    marginTop: 16,
+    fontWeights: 'normal',
+    fontSize: '1rem',
+    marginTop: '1rem',
   },
   agency: {
     fontWeight: '300',

@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, FlatList, Text, View, Pressable, ActivityIndicator} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 
-import Card from '../../components/EmployeeCard';
+import Card from '../../components/PictureCard';
 
 const URL = 'https://gist.githubusercontent.com/ShenyanCao/5a9473984301a2c2fa20354cffad2d72/raw/test_gist';
 
 var db = SQLite.openDatabase('UserDatabase.db');
 
-const StudyList = ({ navigation }) => {
+const Dashboard = ({ navigation }) => {
   const [empList, setList] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState('');
@@ -66,6 +67,7 @@ const StudyList = ({ navigation }) => {
   }
 
   lookupUser(route.params.user)
+  
 
   return (
     <View>
@@ -96,16 +98,16 @@ const StudyList = ({ navigation }) => {
   );
 };
 
-export default StudyList;
+export default Dashboard;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: 'dodgerblue',
   },
   welcomeText: {
     color: 'black',
-    fontWeight: '800',
+    fontWeight: 'Bold',
     fontSize: 42,
   },
   loginButton: {
