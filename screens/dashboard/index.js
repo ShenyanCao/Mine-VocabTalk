@@ -1,15 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, FlatList, Text, View, Pressable, ActivityIndicator} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import * as SQLite from 'expo-sqlite';
 
 import Card from '../../components/EmployeeCard';
 
 const URL = 'https://gist.githubusercontent.com/ShenyanCao/5a9473984301a2c2fa20354cffad2d72/raw/test_gist';
 
+var db = SQLite.openDatabase('UserDatabase.db');
+
 const StudyList = ({ navigation }) => {
   const [empList, setList] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState('');
+  const [photo, setPhoto] = useState('');
+
   console.log('rendered...');
   useEffect(() => {
     if (isLoading) {
@@ -41,13 +46,34 @@ const StudyList = ({ navigation }) => {
   // console.log(URL);
   const route = useRoute();
 
+  function lookupUser(email) {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM table_user where email = ?',
+        [email],
+        (tx, results) => {
+          var len = results.rows.length;
+          if (len > 0) {
+            console.log(results.rows.item(0));
+            setPhoto(results.rows.item(0).profile);
+            setUser(results.rows.item(0));
+          } else {
+            setPhoto("");
+          }
+        }
+      );
+    });
+  }
+
+  lookupUser(route.params.user)
+
   return (
     <View>
-      <Text style={styles.welcomeText}>{route.params.user}</Text>
+      <Text style={styles.welcomeText}>{user.username}</Text>
       <Pressable
         onPress={() => navigation.reset({
           index: 0,
-          routes: [{ name: 'Welcome'}],
+          routes: [{ name: 'Login'}],
         })}
         style={{width: '100%'}}>
         <View style={styles.loginButtonBackground}>

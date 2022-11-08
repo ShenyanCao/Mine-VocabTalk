@@ -12,25 +12,26 @@ const AppButton = props => {
   const {
     onLoginClicked,
     progress = true,
-    loginText = 'Login',
+    buttonText = 'Login',
     isEnable = true,
+    buttonColor = '#FB4F19',
     style = {},
   } = props;
 
-  console.log('loginText= ', loginText);
-
   const backgroundColor = {
-    backgroundColor: isEnable ? 'dodgerblue' : 'darkgrey',
+    backgroundColor: isEnable ? buttonColor : 'darkgrey',
     elevation: isEnable ? 4 : 0,
   };
+
   const textColor = {
     color: isEnable ? 'white' : 'grey',
   };
+  
   return (
     <Pressable
       onPress={onLoginClicked}
       style={[styles.mainContainer, backgroundColor, style]}>
-      <Text style={[styles.text, textColor]}>{loginText}</Text>
+      <Text style={[styles.text, textColor]}>{buttonText}</Text>
 
       <View style={styles.indicator}>
         {progress ? (

@@ -42,8 +42,8 @@ const TextInputLayout = props => {
               style={styles.icon}
               source={
                 passwordVisibility
-                  ? require('../assets/ic_show_password.png')
-                  : require('../assets/ic_hide_password.png')
+                  ? require('../assets/ic_hide_password.png')
+                  : require('../assets/ic_show_password.png')
               }
             />
           </Pressable>
