@@ -5,8 +5,6 @@ import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 import { FlatGrid } from 'react-native-super-grid';
 
-import Card from '../../components/PictureCard';
-
 const URL = 'https://gist.githubusercontent.com/ShenyanCao/5691099b520203f2da2fa964db39d5d5/raw/db.json';
 
 var db = SQLite.openDatabase('UserDatabase.db');
@@ -14,8 +12,6 @@ var db = SQLite.openDatabase('UserDatabase.db');
 const Dashboard = ({ navigation }) => {
   const [empList, setList] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState('');
-  const [photo, setPhoto] = useState('');
 
   console.log('rendered...');
   useEffect(() => {
@@ -47,18 +43,19 @@ const Dashboard = ({ navigation }) => {
 
   return (
     <View  style={styles.mainContainer}>
-    <Pressable
-          onPress={() => navigation.navigate('Setting')}
-          style={{width: '100%'}}>
-          <Image source={require('../../assets/settings.png') } style={styles.button} />
+      <View style={styles.menuContainer}>
+        <Pressable
+          onPress={() => navigation.navigate('Setting')} >
+          <Image source={require('../../assets/settings.png') } style={styles.settingImage}/>
         </Pressable>
+      </View>
     <FlatGrid
       itemDimension={130}
       data={empList}
       style={styles.gridView}
       // staticDimension={300}
       // fixed
-      spacing={10}
+      spacing={20}
       renderItem={({ item }) => (
         <View style={[styles.itemContainer]}>
           <Pressable
@@ -76,52 +73,6 @@ const Dashboard = ({ navigation }) => {
     </View>
   );
   
-
-  // // console.log(URL);
-
-  // return (
-  //   <View>
-  //     <Pressable
-  //       onPress={() => navigation.reset({
-  //         index: 0,
-  //         routes: [{ name: 'Login'}],
-  //       })}
-  //       style={{width: '100%'}}>
-  //       <View style={styles.loginButtonBackground}>
-  //         <Text style={styles.button}>Logout</Text>
-  //       </View>
-  //     </Pressable>
-
-  //     {isLoading ? (
-  //       <ActivityIndicator />
-  //     ) : (
-  //       // <FlatList
-  //       //   data={empList}
-  //       //   keyExtractor={({id}, index) => id}
-  //       //   renderItem={({item}) => {
-  //       //     // console.log('current Item= ', item);
-  //       //     return <Card employee={item} />;
-  //       //   }}
-  //       // />
-  //       <FlatGrid
-  //         itemDimension={130}
-  //         data={empList}
-  //         style={styles.gridView}
-  //         // staticDimension={300}
-  //         // fixed
-  //         spacing={10}
-  //         renderItem={({ item }) => {
-  //           console.log(item.name);
-  //           return <Text>{item.name}</Text>;
-  //           // return <View style={[styles.itemContainer]}>
-  //           //   {/* <Image source={{url: item.image}} style={styles.categoryImage} /> */}
-  //           //   <Text style={styles.itemName}>{item.name}</Text>
-  //           // </View>;
-  //         }}
-  //       />
-  //     )}
-  //   </View>
-  // );
 };
 
 export default Dashboard;
@@ -131,43 +82,34 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  welcomeText: {
-    color: 'black',
-    fontWeight: 'Bold',
-    fontSize: 42,
+  menuContainer: {
+    flexDirection: 'row', 
+    justifyContent: 'flex-end',
+    marginTop: '1rem',
+    marginRight: '2rem',
   },
-  loginButton: {
-    marginHorizontal: 32,
-    bottom: 18,
-  },
-  loginButtonBackground: {
-    width: '100%',
-    height: 70,
-    backgroundColor: 'tomato',
-    justifyContent: 'center',
-  },
-  button: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '600',
+  settingImage: {
+    width: '3rem',
+    height: '3rem',
   },
   gridView: {
-    marginTop: 10,
-    flex: 1,
+    marginLeft: '1rem',
+    marginRight: '1rem',
   },
   itemContainer: {
-    justifyContent: 'flex-end',
-    borderRadius: 5,
-    padding: 10,
-    height: 150,
+    justifyContent: 'space-evenly',
+    paddingTop: '1rem',
+    height: '8rem',
+    width: '8rem',
   },
   itemName: {
-    fontSize: 16,
+    fontSize: '0.8rem',
     fontWeight: '600',
+    paddingTop: '0.5rem',
+    textAlign: 'center',
   },
   categoryImage: {
-    width: '8rem',
-    height: '8rem',
+    width: '7rem',
+    height: '7rem',
   }
 });

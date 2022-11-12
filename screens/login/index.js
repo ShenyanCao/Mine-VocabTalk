@@ -180,9 +180,10 @@ const styles = EStyleSheet.create({
     flex: 1,    
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   welcomeText: {
-    alignSelf: 'center',
+    textAlign: 'center',
     color: '#1DC5BB',
     fontSize: '2rem',
     fontWeight: '700',
@@ -205,8 +206,7 @@ const styles = EStyleSheet.create({
     fontSize: '0.7rem',
     fontWeight: 'normal',
     paddingHorizontal: '0.9rem',
-    alignSelf: 'left',
-    marginLeft: '2.5rem',
+    textAlign: 'center',
   },
   textBox: {
     width: '16rem',

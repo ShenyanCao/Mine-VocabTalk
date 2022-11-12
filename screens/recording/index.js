@@ -61,36 +61,43 @@ const Recording = ({ navigation }) => {
                       index: 0,
                       routes: [{ name: 'Dashboard'}],
                     })}
-            style={{width: '100%'}}>
+            style={styles.homeContainer}>
             <Image source={require('../../assets/home.png') } style={styles.homeButton} />
           </Pressable>
-          <Image source={{url: item.pictureURL}} style={styles.itemImage} />
-          <Pressable
-            onPress={speak}
-            style={{width: '100%'}}>
-            <Image source={require('../../assets/question.png') } style={styles.recordButton} />
-          </Pressable>
+           
+            <Image source={{url: item.pictureURL}} style={styles.itemImage} />
+          
+          
           <Pressable
             onPress={record}
-            style={{width: '100%'}}>
+            style={styles.recordContainer}>
             <Image source={require('../../assets/record.png') } style={styles.recordButton} />
           </Pressable>
-          <Text>Results:</Text>
-            {results.map((result, index) => {
-                return <Text key={`result-${index}`}>{result}</Text>;
-            })}
-          {(index < items.length - 1) ?
-          <Pressable
-            onPress={() => navigation.reset({
-                index: 0,
-                routes: [{ name: 'Recording', params: { current: items[index+1], index: index+1, items: items}}],
+
+          <View style={styles.bottomPart}>      
+            <Pressable
+              onPress={speak}
+              style={styles.questionContainer}>
+              <Image source={require('../../assets/question.png') } style={styles.questionButton} />
+            </Pressable>
+            
+            <Text style={styles.resultText}>Results:</Text>
+              {results.map((result, index) => {
+                  return <Text key={`result-${index}`}>{result}</Text>;
               })}
-            style={{width: '100%'}}>
-            <Image source={require('../../assets/next.png') } style={styles.recordButton} />
-          </Pressable>
-          : 
-          <View></View>
-        }
+            {(index < items.length - 1) ?
+            <Pressable
+              onPress={() => navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Recording', params: { current: items[index+1], index: index+1, items: items}}],
+                })}
+              style={styles.nextContainer}>
+              <Image source={require('../../assets/next.png') } style={styles.nextButton} />
+            </Pressable>
+            : 
+            <View></View>
+            }
+          </View>
         </View>
     );
 };
@@ -102,16 +109,63 @@ const styles = EStyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    homeContainer: {
+      flexDirection: 'row', 
+      justifyContent: 'left',
+      marginTop: '1rem',
+      marginLeft: '2rem',
+    },
     homeButton: {
-        width: '8rem',
-        height: '8rem',
+        width: '3rem',
+        height: '3rem',
     },
     itemImage: {
-        width: '15rem',
-        height: '15rem',
+        alignSelf: 'center',
+        width: '25rem',
+        height: '25rem',
+    },
+    recordContainer: {
+      flexDirection: 'row', 
+      justifyContent: 'center',
+      marginTop: '2rem',
+      marginRight: '1rem',
     },
     recordButton: {
-        width: '8rem',
-        height: '8rem',
+        width: '6rem',
+        height: '6rem',
+    },
+    bottomPart: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginTop: '1rem',
+    },
+    questionContainer: {
+      flexDirection: 'row', 
+      justifyContent: 'left',
+      marginTop: '1rem',
+      marginLeft: '2rem',
+    },
+    questionButton: {
+      width: '5rem',
+      height: '5rem',
+    },
+    resultText: {
+      color: '#76BA1B',
+      fontSize: '2rem',
+      fontWeight: '600',
+      paddingHorizontal: '2rem',
+      textAlign: 'center',
+      marginTop: '2rem',
+      marginLeft: '1.5rem',
+    },
+    nextContainer: {
+      flexDirection: 'row', 
+      justifyContent: 'right',
+      marginTop: '2rem',
+      marginLeft: '2rem',
+    },
+    nextButton: {
+      width: '3rem',
+      height: '3rem',
     },
 });
