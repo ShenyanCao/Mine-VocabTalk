@@ -7,6 +7,7 @@ import * as SQLite from 'expo-sqlite';
 import * as ImagePicker from 'expo-image-picker';
 import { Base64 } from 'js-base64';
 import * as ImageManipulator from 'expo-image-manipulator';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 var db = SQLite.openDatabase('UserDatabase.db');
 const ICON_SIZE = 100;
@@ -214,36 +215,35 @@ const SignUp = ({ navigation }) => {
       console.log(result.uri);
     }
   };
-
   return (
     <View style={styles.mainContainer}>
-      <View style={{marginTop: 24, paddingHorizontal: 36}}>
-        <Text style={styles.welcomeText}>Sign up for VacabTalk</Text>
-        <Text style={styles.welcomeDescription}>
-          Upload profile picture below.
-        </Text>
+
+      <Text style={styles.welcomeText}>Sign up for VacabTalk</Text>
+      
+      <Text style={styles.welcomeDescription}>
+        Upload profile picture below.
+      </Text>
+
+      <View style={styles.photo}>
+        <Pressable onPress={pickProfile}>
+          <Image 
+            style={styles.profile}
+            source={photo === '' ? require('../../assets/profile.png') : {uri: photo}}
+          />
+          <Text style={styles.profileDescription}>
+            Photo Library
+          </Text>
+        </Pressable>
+        <Pressable onPress={cameraProfile}>
+          <Image 
+            style={styles.camera}
+            source={require('../../assets/camera.png')}
+          />
+          <Text style={styles.cameraDescription}>
+            Take Photo
+          </Text>
+        </Pressable>
       </View>
-      <View style={styles.inputBackground}>
-        <View style={styles.photo}>
-          <Pressable onPress={pickProfile}>
-            <Image 
-              style={styles.profile}
-              source={photo === '' ? require('../../assets/profile.png') : {uri: photo}}
-            />
-            <Text style={styles.profileDescription}>
-              Photo Library
-            </Text>
-          </Pressable>
-          <Pressable onPress={cameraProfile}>
-            <Image 
-              style={styles.camera}
-              source={require('../../assets/camera.png')}
-            />
-            <Text style={styles.cameraDescription}>
-              Take Photo
-            </Text>
-          </Pressable>
-        </View>
 
         <TextInputLayout
           style={styles.textBox}
@@ -277,133 +277,111 @@ const SignUp = ({ navigation }) => {
           secureEntry={true}
         />
         <Text style={styles.errorText}>{repeatPasswordError}</Text>
-      </View>
 
-      <SignupButton
-        style={styles.signupButton}
-        buttonText={'Sign Up'}
-        buttonColor={'#FB4F19'}
-        onLoginClicked={handleSignUp}
-        isEnable={signupButtonStatus}
-        progress={false}
-      />
+        <SignupButton
+          style={styles.signupButton}
+          buttonText={'Sign Up'}
+          buttonColor={'#FB4F19'}
+          onLoginClicked={handleSignUp}
+          isEnable={signupButtonStatus}
+          progress={false}
+        />
 
       <Pressable
         onPress={() => navigation.navigate('Login')}
         style={{width: '100%'}}>
-        <View style={styles.loginButtonBackground}>
           <Text style={styles.loginButton}>
             Already have an account?
-            <Text style={{color: '#1DC5BB'}}> Login!</Text>
+          <Text style={{color: '#1DC5BB'}}> Login!</Text>
           </Text>
-        </View>
       </Pressable>
+
     </View>
+      
   );
 };
 
 export default SignUp;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   mainContainer: {
     flex: 1,    
     backgroundColor: '#fff',
-    justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
-  },
-  inputBackground: {
-    flex: 1,
-    marginTop: 24,
-    paddingHorizontal: 32,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#a3a0a0',
-    padding: 8,
-    margin: 24,
-    marginBottom: 12,
-    fontSize: 18,
   },
   welcomeText: {
-    textAlign: 'center',
+    alignSelf: 'center',
     color: '#FB4F19',
-    fontWeight: '800',
-    fontSize: 42,
-    marginTop: 50,
-    marginBottom: 30,
+    fontSize: '2rem',
+    fontWeight: '700',
+    marginTop: '3rem',
+    marginBottom: '1rem',
   },
-  errorText: {
-    color: '#EB5053',
-    fontSize: 13,
-    fontWeight: '400',
-    paddingHorizontal: 4,
-  },
-  text: {
-    color: 'black',
-    marginStart: 24,
-    marginEnd: 24,
-    marginBottom: 12,
-    fontSize: 16,
-  },
-  textBox: {
-    width: 400,
-    alignSelf: 'center',
-    marginTop: 10,
-    marginBottome: 10,
-  },
-  signupButton: {
-    width: 300,
-    alignSelf: 'center',
-    marginBottome: 100,
-  },
-  loginButton: {
-    color: '#000000',
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: '600',
-    marginBottom: 100,
-    marginTop: 100,
-  },
-  
   welcomeDescription: {
-    textAlign: 'center',
+    alignSelf: 'center',
     color: '#FB4F00',
-    fontWeight: '500',
-    fontSize: 24,
-    marginBottom: 10,
+    fontSize: '1.5rem',
+    fontWeights: 'normal',
+    marginTop: '1rem',
+    marginBottom: '0.5rem',
+  },
+  photo: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: '0.5rem',
+    marginTop: '0.5rem',
   },
   profile: {
     width: ICON_SIZE,
     height: ICON_SIZE,
     alignSelf: 'center',
-    marginBottom: 10,
   },
   profileDescription: {
     alignSelf: 'center',
     color: '#000',
-    fontWeight: '500',
-    fontSize: 24,
-    marginBottom: 10,
+    fontWeights: 'normal',
+    fontSize: '1rem',
   },
   camera: {
     width: ICON_SIZE,
     height: ICON_SIZE,
-    marginBottom: 10,
-    marginLeft: 70,
+    marginLeft: '3rem',
     alignSelf: 'center',
   },
   cameraDescription: {
     alignSelf: 'center',
     color: '#000',
-    fontWeight: '500',
-    fontSize: 24,
-    marginBottom: 10,
-    marginLeft: 70,
+    fontWeights: 'normal',
+    fontSize: '1rem',
+    marginLeft: '3rem',
   },
-  photo: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 10,
+  errorText: {
+    color: '#EB5053',
+    fontSize: '0.7rem',
+    fontWeight: 'normal',
+    paddingHorizontal: '0.9rem',
+    alignSelf: 'left',
+    marginLeft: '2.5rem',
   },
+  textBox: {
+    width: '16rem',
+    alignSelf: 'center',
+    marginTop: '0.5rem',
+    marginBottome: '0.5rem',
+  },
+  signupButton: {
+    width: '10rem',
+    alignSelf: 'center',
+    marginTop: '0.5rem',
+    marginBottome: '0.5rem',
+  },
+  loginButton: {
+    color: '#000000',
+    textAlign: 'center',
+    fontSize: '1rem',
+    fontWeight: 'normal',
+    marginBottom: '2rem',
+    marginTop: '2rem',
+  },
+  
 });

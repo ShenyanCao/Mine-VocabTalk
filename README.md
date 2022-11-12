@@ -22,3 +22,7 @@
     - wait for ios simulater to start and install this app
 
 # Reference:
+
+
+Notes:
+npm i react-native-extended-stylesheet --save

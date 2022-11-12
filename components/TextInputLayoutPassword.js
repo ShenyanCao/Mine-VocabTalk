@@ -1,10 +1,12 @@
 import React, {useRef, useState} from 'react';
 import {View, TextInput, Image, StyleSheet, Pressable} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 /*
     @props:
         placeholder:
 */
-const ICON_SIZE = 24;
+const ICON_SIZE = '1.5rem';
+
 const TextInputLayoutPassword = props => {
   const {style = {}, secureEntry = false} = props;
   const [isFocused, setFocused] = useState(false);
@@ -55,18 +57,18 @@ const TextInputLayoutPassword = props => {
 
 export default TextInputLayoutPassword;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   mainContainer: {
-    paddingVertical: 2,
+    paddingVertical: '0.1rem',
   },
   input: {
-    elevation: 4,
-    borderWidth: 2,
+    elevation: '0.1rem',
+    borderWidth: '0.05rem',
     borderColor: '#C7C1C1',
-    borderRadius: 6,
-    padding: 10,
-    fontSize: 16,
-    fontWeight: '600',
+    borderRadius: '0.5rem',
+    padding: '0.6rem',
+    fontSize: '1rem',
+    fontWeight: 'normal',
   },
   togglePassword: {
     flex: 1,
@@ -80,6 +82,6 @@ const styles = StyleSheet.create({
   icon: {
     width: ICON_SIZE,
     height: ICON_SIZE,
-    marginEnd: 12,
+    marginEnd: '0.5rem',
   },
 });

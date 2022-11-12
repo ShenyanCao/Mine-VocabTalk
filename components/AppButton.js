@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {
   View,
   Text,
@@ -44,22 +45,22 @@ const AppButton = props => {
 
 export default AppButton;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   mainContainer: {
-    borderRadius: 10,
+    borderRadius: '1rem',
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
-    fontSize: 24,
-    fontWeight: '500',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
     color: 'grey',
-    paddingVertical: 12,
+    paddingVertical: '0.5rem',
     textAlign: 'center',
   },
   progressBar: {
-    marginEnd: 12,
+    marginEnd: '1rem',
   },
   indicator: {
     flexDirection: 'row',
