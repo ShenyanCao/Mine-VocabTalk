@@ -146,7 +146,7 @@ const SignUp = ({ navigation }) => {
     if (!result) {
       setEmailError('Invalid Email');
     }
-
+    // alert("email valid");
     var encode = Base64.encode(repeatPassword);
 
     const resizedPhoto = await ImageManipulator.manipulateAsync(
@@ -154,16 +154,19 @@ const SignUp = ({ navigation }) => {
       [{ resize: { width: ICON_SIZE, height: ICON_SIZE} }],
       { compress: 0.7, format: 'jpeg' },
     );
+    // alert("photo valid");
 
     console.log(email, username, password, encode, resizedPhoto.uri);
-
+    // alert("log valid");
     db.transaction(function (tx) {
       tx.executeSql(
         'INSERT INTO table_user (email, username, password, profile, is_login) VALUES (?,?,?,?,?)',
         [String(email).toLowerCase(), username, encode, resizedPhoto.uri, true],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
+          // alert("db valid");
           if (results.rowsAffected > 0) {
+          // alert("db ok");
             navigation.reset({
               index: 0,
               routes: [{ name: 'Dashboard', params: { user: String(email).toLowerCase()}}],
@@ -172,11 +175,16 @@ const SignUp = ({ navigation }) => {
             setPasswordError('Registration Failed');
             setRepeatPasswordError('Registration Failed');
           }
+        },
+        (error) => {
+            console.log("execute error: " + JSON.stringify(error))
+            alert(JSON.stringify(error));
         }
       );
     });
+    
   };
-
+  
   const pickProfile = async () => {
     const permissionResult = ImagePicker.requestMediaLibraryPermissionsAsync().catch((error) => {
       alert(error.message);

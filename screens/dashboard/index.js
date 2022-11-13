@@ -4,6 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 import { FlatGrid } from 'react-native-super-grid';
+// import CachedData from '../../constants/cached_data';
 
 const URL = 'https://gist.githubusercontent.com/ShenyanCao/5691099b520203f2da2fa964db39d5d5/raw/db.json';
 
@@ -12,6 +13,7 @@ var db = SQLite.openDatabase('UserDatabase.db');
 const Dashboard = ({ navigation }) => {
   const [empList, setList] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  // alert("on dashboard.")
 
   console.log('rendered...');
   useEffect(() => {

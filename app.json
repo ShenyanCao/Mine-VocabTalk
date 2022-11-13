@@ -19,7 +19,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.jakegejun.AwesomeProject"
+      "bundleIdentifier": "com.jakegejun.AwesomeProject",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,7 +30,8 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.jakegejun.AwesomeProject"
+      "package": "com.jakegejun.AwesomeProject",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,6 +41,13 @@
         "expo-image-picker",
         {
           "photosPermission": "The photo access to allow you change profile photo."
+        }
+      ],
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
         }
       ]
     ],

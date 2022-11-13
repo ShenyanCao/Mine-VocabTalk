@@ -4,10 +4,10 @@ import {StyleSheet, Text, Pressable, View, Image} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import * as Speech from 'expo-speech';
 import { useRoute } from '@react-navigation/native';
-// import Voice, {
-//     SpeechResultsEvent,
-//     SpeechErrorEvent,
-//   } from "@react-native-voice/voice";
+import Voice, {
+    SpeechResultsEvent,
+    SpeechErrorEvent,
+  } from "@react-native-voice/voice";
 
 const Recording = ({ navigation }) => {
     const route = useRoute();
@@ -25,33 +25,33 @@ const Recording = ({ navigation }) => {
         });
     };
 
-    // useEffect(() => {
-    //     function onSpeechResults(e) {
-    //       setResults(e.value ?? []);
-    //     }
-    //     function onSpeechError(e) {
-    //       console.error(e);
-    //     }
-    //     Voice.onSpeechError = onSpeechError;
-    //     Voice.onSpeechResults = onSpeechResults;
-    //     return function cleanup() {
-    //       Voice.destroy().then(Voice.removeAllListeners);
-    //     };
-    // }, []);
+    useEffect(() => {
+        function onSpeechResults(e) {
+          setResults(e.value ?? []);
+        }
+        function onSpeechError(e) {
+          console.error(e);
+        }
+        Voice.onSpeechError = onSpeechError;
+        Voice.onSpeechResults = onSpeechResults;
+        return function cleanup() {
+          Voice.destroy().then(Voice.removeAllListeners);
+        };
+    }, []);
     
     async function record() {
-        // try {
-        //   if (isListening) {
-        //     await Voice.stop();
-        //     setIsListening(false);
-        //   } else {
-        //     setResults([]);
-        //     await Voice.start("en-US");
-        //     setIsListening(true);
-        //   }
-        // } catch (e) {
-        //   console.error(e);
-        // }
+        try {
+          if (isListening) {
+            await Voice.stop();
+            setIsListening(false);
+          } else {
+            setResults([]);
+            await Voice.start("en-US");
+            setIsListening(true);
+          }
+        } catch (e) {
+          console.error(e);
+        }
     }
 
     return (
@@ -71,7 +71,7 @@ const Recording = ({ navigation }) => {
           <Pressable
             onPress={record}
             style={styles.recordContainer}>
-            <Image source={require('../../assets/record.png') } style={styles.recordButton} />
+            <Image source={isListening ? require('../../assets/recording.png') : require('../../assets/record.png') } style={styles.recordButton} />
           </Pressable>
 
           <View style={styles.bottomPart}>      
@@ -111,7 +111,7 @@ const styles = EStyleSheet.create({
     },
     homeContainer: {
       flexDirection: 'row', 
-      justifyContent: 'left',
+      justifyContent: 'flex-start',
       marginTop: '1rem',
       marginLeft: '2rem',
     },
@@ -141,7 +141,7 @@ const styles = EStyleSheet.create({
     },
     questionContainer: {
       flexDirection: 'row', 
-      justifyContent: 'left',
+      justifyContent: 'flex-start',
       marginTop: '1rem',
       marginLeft: '2rem',
     },
@@ -160,7 +160,7 @@ const styles = EStyleSheet.create({
     },
     nextContainer: {
       flexDirection: 'row', 
-      justifyContent: 'right',
+      justifyContent: 'flex-end',
       marginTop: '2rem',
       marginLeft: '2rem',
     },
