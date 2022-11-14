@@ -184,7 +184,7 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
 # Part 3: Demo of basic functionality and state management
 
 ## Demo:
-[label](../../../Downloads/demoFunc.MP4)
+(https://drive.google.com/file/d/14CRqUKGlKiASD0AZBclQz4cMs-fnXgRn/view?usp=sharing)
 
 ## Basic functionality implemented:
   - Login and signup screen with textbox and login/signup button, with state management and sqlite database. 
@@ -200,6 +200,7 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
 - **Language**: React Native
 - **Dev Platform**: Mac OS
 - **Running Platform**: iOS
+- **Testing device:** iPad Air (4th generation)
 
 ## Instructions to compile
 - Follow [Expo EAS build instruction](https://docs.expo.dev/build/setup/) to build a ready-to-submit binary of this app for the Apple App Store.
