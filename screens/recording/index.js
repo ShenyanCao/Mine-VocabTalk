@@ -17,20 +17,30 @@ const Recording = ({ navigation }) => {
     const [results, setResults] = useState([]);
     const [isListening, setIsListening] = useState(false);
 
+    function askquestion (thingToSay) {
+      console.log("speaking words:" + thingToSay);
+      Speech.speak(thingToSay, {
+        language: 'en-US',
+      });
+    };
+
     function speak () {
         const thingToSay = item.pictureWord;
-        console.log("speaking words:" + thingToSay);
-        Speech.speak(thingToSay, {
-          language: 'en-US',
-        });
+        askquestion(thingToSay);
     };
 
     useEffect(() => {
         function onSpeechResults(e) {
           setResults(e.value ?? []);
+          console.log("You said word: " + results[0]);
+          if(String(results[0]).trim().toLowerCase() === item.pictureWord) {
+            askquestion("well done");
+          } else {
+            askquestion("try again, or Help");
+          }
         }
         function onSpeechError(e) {
-          console.error(e);
+          console.log(e);
         }
         Voice.onSpeechError = onSpeechError;
         Voice.onSpeechResults = onSpeechResults;
@@ -81,10 +91,7 @@ const Recording = ({ navigation }) => {
               <Image source={require('../../assets/question.png') } style={styles.questionButton} />
             </Pressable>
             
-            <Text style={styles.resultText}>Results:</Text>
-              {results.map((result, index) => {
-                  return <Text key={`result-${index}`}>{result}</Text>;
-              })}
+            <Text style={styles.resultText}>Results: {results[0]}</Text>
             {(index < items.length - 1) ?
             <Pressable
               onPress={() => navigation.reset({
