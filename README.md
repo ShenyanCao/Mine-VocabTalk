@@ -184,7 +184,7 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
 # Part 3: Demo of basic functionality and state management
 
 ## Demo:
-(https://drive.google.com/file/d/14CRqUKGlKiASD0AZBclQz4cMs-fnXgRn/view?usp=sharing)
+(https://youtube.com/shorts/JCejlYXZB3o?feature=share)
 
 ## Basic functionality implemented:
   - Login and signup screen with textbox and login/signup button, with state management and sqlite database. 
