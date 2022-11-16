@@ -28,7 +28,7 @@ const SignUp = ({ navigation }) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
-      return re.test(String(email).toLowerCase()) && lookupUser(String(email).toLowerCase()) === null;
+      return re.test(String(email).toLowerCase()) && lookupUser(String(email).toLowerCase()) === null && String(email).toLowerCase() !== "admin@123.com";
   }
 
   function validateUsername(username) {
@@ -65,8 +65,10 @@ const SignUp = ({ navigation }) => {
 
     repeatPassword !== '' &&
     repeatPassword !== undefined &&
-    emailAddress !== '' &&
-    emailAddress !== undefined &&
+    email !== '' &&
+    email !== undefined &&
+    username !== '' &&
+    username !== undefined &&
     password !== '' &&
     password !== undefined &&
     password === repeatPassword
@@ -74,11 +76,11 @@ const SignUp = ({ navigation }) => {
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
   }
 
-  function handleUsername(username) {
-    console.log('username= ', username);
-    username = username.trim();
-    setUsername(username);
-    if (!validateUsername(username)) {
+  function handleUsername(name) {
+    console.log('username= ', name);
+    username = name.trim();
+    setUsername(name);
+    if (!validateUsername(name)) {
       setUsernameError('Please enter your kid\'s name.');
     } else {
       setUsernameError(' ');
@@ -86,8 +88,10 @@ const SignUp = ({ navigation }) => {
 
     repeatPassword !== '' &&
     repeatPassword !== undefined &&
-    emailAddress !== '' &&
-    emailAddress !== undefined &&
+    username !== '' &&
+    username !== undefined &&
+    email !== '' &&
+    email !== undefined &&
     password !== '' &&
     password !== undefined &&
     password === repeatPassword
@@ -104,9 +108,11 @@ const SignUp = ({ navigation }) => {
     repeatPassword !== undefined &&
     email !== '' &&
     email !== undefined &&
-    newPassword !== '' &&
-    newPassword !== undefined &&
-    newPassword === repeatPassword
+    username !== '' &&
+    username !== undefined &&
+    password !== '' &&
+    password !== undefined &&
+    password === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
   }
@@ -117,26 +123,18 @@ const SignUp = ({ navigation }) => {
 
     console.log(email, password, repeatPassword);
 
-    newRepeatPassword !== '' &&
-    newRepeatPassword !== undefined &&
+    repeatPassword !== '' &&
+    repeatPassword !== undefined &&
     email !== '' &&
     email !== undefined &&
+    username !== '' &&
+    username !== undefined &&
     password !== '' &&
     password !== undefined &&
-    password === newRepeatPassword
+    password === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
   }
-
-  const handleLogin = ({ navigation, route }) => {
-    if (email === '' || password === '') {
-      return;
-    }
-    const result = validateEmail(email);
-    if (!result) {
-      setEmailError('Invalid Email');
-    }
-  };
 
   const handleSignUp = async () => {
     if (username === '' || email === '' || password === '' || repeatPassword === '') {
@@ -146,7 +144,8 @@ const SignUp = ({ navigation }) => {
     if (!result) {
       setEmailError('Invalid Email');
     }
-    // alert("email valid");
+
+    // valid email
     var encode = Base64.encode(repeatPassword);
 
     const resizedPhoto = await ImageManipulator.manipulateAsync(
@@ -223,6 +222,7 @@ const SignUp = ({ navigation }) => {
       console.log(result.uri);
     }
   };
+  
   return (
     <View style={styles.mainContainer}>
 
@@ -320,7 +320,7 @@ const styles = EStyleSheet.create({
   },
   welcomeText: {
     textAlign: 'center',
-    color: '#1DC5BB',
+    color: '#FB4F19',
     fontSize: '2rem',
     fontWeight: '700',
     marginTop: '3rem',
