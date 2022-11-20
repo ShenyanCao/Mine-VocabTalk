@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
         }
       );
     });
-  }, []);
+  }, []);  // runs on first render
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -108,13 +108,15 @@ const Login = ({ navigation }) => {
       setEmailError('Invalid Email');
       return;
     }
+
     // alert("email valid");
     var encode = Base64.encode(password);
     console.log(login_data, encode);
     if (email !== "admin@123.com" && (login_data === null || login_data.password !== encode)) {
-      setPasswordError("Password incorrect!");
+      setPasswordError("Email or password incorrect!");
       return;
     } 
+    
     // alert("password valid");
     navigation.reset({
       index: 0,
