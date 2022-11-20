@@ -29,12 +29,12 @@ const SignUp = ({ navigation }) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
       return re.test(String(email).toLowerCase()) && lookupUser(String(email).toLowerCase()) === null && String(email).toLowerCase() !== "admin@123.com";
-  }
+  };
 
   function validateUsername(username) {
     if (!username) return false;
     return true;
-  }
+  };
 
   function lookupUser(email) {
     console.log("looking up user: " + email);
@@ -51,7 +51,7 @@ const SignUp = ({ navigation }) => {
         }
     });
     return user_data;
-  }
+  };
 
   function handleEmail(emailAddress) {
     console.log('email= ', emailAddress);
@@ -74,7 +74,7 @@ const SignUp = ({ navigation }) => {
     password === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
-  }
+  };
 
   function handleUsername(name) {
     console.log('username= ', name);
@@ -97,7 +97,7 @@ const SignUp = ({ navigation }) => {
     password === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
-  }
+  };
 
 
   function handlePassword(newPassword) {
@@ -115,7 +115,7 @@ const SignUp = ({ navigation }) => {
     password === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
-  }
+  };
 
   function handleRepeatPassword(newRepeatPassword) {
     newRepeatPassword = newRepeatPassword.trim();
@@ -134,7 +134,7 @@ const SignUp = ({ navigation }) => {
     password === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
-  }
+  };
 
   const handleSignUp = async () => {
     if (username === '' || email === '' || password === '' || repeatPassword === '') {

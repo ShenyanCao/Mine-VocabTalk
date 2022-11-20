@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, FlatList, Text, View, Pressable, ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, Pressable, Share} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
-import { FlatGrid } from 'react-native-super-grid';
-
 
 var db = SQLite.openDatabase('UserDatabase.db');
 
@@ -31,8 +29,36 @@ const Setting = ({ navigation }) => {
         );
       });
     }
+
+    const onShare = async () => {
+      try {
+        const result = await Share.share({
+          message: 'VocabTalk is a really great educational game app for toddlers.',
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
     return (
         <View  style={styles.mainContainer}>
+             <Pressable
+                onPress={onShare} 
+                style={{width: '100%'}}>
+                <View style={styles.ButtonBackground}>
+                <Text style={styles.button}>Sharing</Text>
+                </View>
+            </Pressable>
+
             <Pressable
                 onPress={() => navigation.reset({
                 index: 0,

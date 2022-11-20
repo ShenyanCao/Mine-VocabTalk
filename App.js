@@ -12,8 +12,8 @@ const rem = parseInt(height * 18 / 900);
 import Login from './screens/login/index';
 import SignUp from './screens/signup/index';
 import Dashboard from './screens/dashboard/index';
-import Recording from './screens/recording/index'
-import Setting from './screens/setting/index';;
+import Recording from './screens/recording/index';
+import Setting from './screens/setting/index';
 
 const Stack = createNativeStackNavigator();
 
