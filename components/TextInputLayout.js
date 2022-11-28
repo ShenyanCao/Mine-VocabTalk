@@ -5,7 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
     @props:
         placeholder:
 */
-const ICON_SIZE = '1.5rem';
+const ICON_SIZE = '16rem';
 
 const TextInputLayout = props => {
   const {style = {}, secureEntry = false} = props;
@@ -59,15 +59,14 @@ export default TextInputLayout;
 
 const styles = EStyleSheet.create({
   mainContainer: {
-    paddingVertical: '0.1rem',
+    paddingVertical: '0.7%',
   },
   input: {
-    elevation: '0.1rem',
-    borderWidth: '0.05rem',
+    borderWidth: '1rem',
     borderColor: '#C7C1C1',
-    borderRadius: '0.5rem',
-    padding: '0.6rem',
-    fontSize: '1rem',
+    borderRadius: '3rem',
+    padding: '2rem',
+    fontSize: '16rem',
     fontWeight: 'normal',
   },
   togglePassword: {
@@ -82,6 +81,6 @@ const styles = EStyleSheet.create({
   icon: {
     width: ICON_SIZE,
     height: ICON_SIZE,
-    marginEnd: '1rem',
+    marginEnd: '2rem',
   },
 });

@@ -47,20 +47,20 @@ export default AppButton;
 
 const styles = EStyleSheet.create({
   mainContainer: {
-    borderRadius: '1rem',
+    borderRadius: '10rem',
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
-    fontSize: '1.2rem',
+    fontSize: '18rem',
     fontWeight: 'bold',
     color: 'grey',
-    paddingVertical: '0.5rem',
+    paddingVertical: '4%',
     textAlign: 'center',
   },
   progressBar: {
-    marginEnd: '1rem',
+    marginEnd: '2rem',
   },
   indicator: {
     flexDirection: 'row',

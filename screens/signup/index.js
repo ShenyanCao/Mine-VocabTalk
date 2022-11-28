@@ -10,7 +10,7 @@ import * as ImageManipulator from 'expo-image-manipulator';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 var db = SQLite.openDatabase('UserDatabase.db');
-const ICON_SIZE = 100;
+const ICON_SIZE = '50rem';
 
 const SignUp = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -28,7 +28,7 @@ const SignUp = ({ navigation }) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
-      return re.test(String(email).toLowerCase()) && lookupUser(String(email).toLowerCase()) === null && String(email).toLowerCase() !== "admin@123.com";
+      return re.test(String(email).toLowerCase()) && lookupUser(String(email).toLowerCase()) === null;
   };
 
   function validateUsername(username) {
@@ -65,8 +65,8 @@ const SignUp = ({ navigation }) => {
 
     repeatPassword !== '' &&
     repeatPassword !== undefined &&
-    email !== '' &&
-    email !== undefined &&
+    emailAddress !== '' &&
+    emailAddress !== undefined &&
     username !== '' &&
     username !== undefined &&
     password !== '' &&
@@ -77,8 +77,8 @@ const SignUp = ({ navigation }) => {
   };
 
   function handleUsername(name) {
-    console.log('username= ', name);
-    username = name.trim();
+    console.log('name= ', name);
+    name = name.trim();
     setUsername(name);
     if (!validateUsername(name)) {
       setUsernameError('Please enter your kid\'s name.');
@@ -88,8 +88,8 @@ const SignUp = ({ navigation }) => {
 
     repeatPassword !== '' &&
     repeatPassword !== undefined &&
-    username !== '' &&
-    username !== undefined &&
+    name !== '' &&
+    name !== undefined &&
     email !== '' &&
     email !== undefined &&
     password !== '' &&
@@ -110,9 +110,9 @@ const SignUp = ({ navigation }) => {
     email !== undefined &&
     username !== '' &&
     username !== undefined &&
-    password !== '' &&
-    password !== undefined &&
-    password === repeatPassword
+    newpassword !== '' &&
+    newpassword !== undefined &&
+    newpassword === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
   };
@@ -123,8 +123,8 @@ const SignUp = ({ navigation }) => {
 
     console.log(email, password, repeatPassword);
 
-    repeatPassword !== '' &&
-    repeatPassword !== undefined &&
+    newrepeatPassword !== '' &&
+    newrepeatPassword !== undefined &&
     email !== '' &&
     email !== undefined &&
     username !== '' &&
@@ -150,7 +150,7 @@ const SignUp = ({ navigation }) => {
 
     const resizedPhoto = await ImageManipulator.manipulateAsync(
       photo,
-      [{ resize: { width: ICON_SIZE, height: ICON_SIZE} }],
+      [{ resize: { width: 1000, height: 1000} }],
       { compress: 0.7, format: 'jpeg' },
     );
     // alert("photo valid");
@@ -319,26 +319,25 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
   },
   welcomeText: {
-    textAlign: 'center',
     color: '#FB4F19',
-    fontSize: '2rem',
+    fontSize: '25rem',
     fontWeight: '700',
-    marginTop: '3rem',
-    marginBottom: '1rem',
+    marginTop: '3%',
+    marginBottom: '2%',
   },
   welcomeDescription: {
     textAlign: 'center',
     color: '#FB4F00',
-    fontSize: '1.5rem',
+    fontSize: '18rem',
     fontWeights: 'normal',
-    marginTop: '1rem',
-    marginBottom: '0.5rem',
+    marginTop: '3%',
+    marginBottom: '2%',
   },
   photo: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: '0.5rem',
-    marginTop: '0.5rem',
+    marginTop: '3%',
+    marginBottom: '2%',
   },
   profile: {
     width: ICON_SIZE,
@@ -349,48 +348,48 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
     color: '#000',
     fontWeights: 'normal',
-    fontSize: '1rem',
+    fontSize: '13rem',
   },
   camera: {
     width: ICON_SIZE,
     height: ICON_SIZE,
-    marginLeft: '3rem',
+    marginLeft: '10%',
     alignSelf: 'center',
   },
   cameraDescription: {
     alignSelf: 'center',
     color: '#000',
     fontWeights: 'normal',
-    fontSize: '1rem',
-    marginLeft: '3rem',
+    fontSize: '13rem',
+    marginLeft: '10%',
   },
   errorText: {
     color: '#EB5053',
-    fontSize: '0.7rem',
+    fontSize: '12rem',
     fontWeight: 'normal',
-    paddingHorizontal: '0.9rem',
+    paddingHorizontal: '2rem',
     textAlign: 'center',
-    marginLeft: '2.5rem',
+    marginBottom: '1%',
   },
   textBox: {
-    width: '16rem',
+    width: '60%',
     alignSelf: 'center',
-    marginTop: '0.5rem',
-    marginBottome: '0.5rem',
+    marginTop: '0.5%',
+    marginBottome: '0.5%',
   },
   signupButton: {
-    width: '10rem',
+    width: '30%',
     alignSelf: 'center',
-    marginTop: '0.5rem',
-    marginBottome: '0.5rem',
+    marginTop: '3%',
+    marginBottom: '1%'
   },
   loginButton: {
     color: '#000000',
     textAlign: 'center',
-    fontSize: '1rem',
+    fontSize: '13rem',
     fontWeight: 'normal',
-    marginBottom: '2rem',
-    marginTop: '2rem',
+    marginTop: '15%',
+    marginBottom: '1%'
   },
   
 });

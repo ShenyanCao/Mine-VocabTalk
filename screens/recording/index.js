@@ -75,8 +75,9 @@ const Recording = ({ navigation }) => {
             <Image source={require('../../assets/home.png') } style={styles.homeButton} />
           </Pressable>
            
+          <View style={styles.itemImageContainer}>
             <Image source={{url: item.pictureURL}} style={styles.itemImage} />
-          
+          </View>
           
           <Pressable
             onPress={record}
@@ -119,60 +120,62 @@ const styles = EStyleSheet.create({
     homeContainer: {
       flexDirection: 'row', 
       justifyContent: 'flex-start',
-      marginTop: '1rem',
-      marginLeft: '2rem',
+      marginTop: '5%',
+      marginLeft: '5%',
     },
     homeButton: {
-        width: '3rem',
-        height: '3rem',
+      width: '30rem',
+      height: '30rem',
     },
+    itemImageContainer: {
+      flexDirection: 'row', 
+      justifyContent: 'center',
+      marginTop: '3%',
+  },
     itemImage: {
-        alignSelf: 'center',
-        width: '25rem',
-        height: '25rem',
+      alignSelf: 'center',
+      width: '300rem',
+      height: '300rem',
     },
     recordContainer: {
       flexDirection: 'row', 
       justifyContent: 'center',
-      marginTop: '2rem',
-      marginRight: '1rem',
+      marginTop: '4%',
     },
     recordButton: {
-        width: '6rem',
-        height: '6rem',
+        width: '100rem',
+        height: '100rem',
     },
     bottomPart: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      marginTop: '1rem',
+      marginTop: '5%',
+      marginLeft: '2%',
     },
     questionContainer: {
       flexDirection: 'row', 
       justifyContent: 'flex-start',
-      marginTop: '1rem',
-      marginLeft: '2rem',
+      marginLeft: '2%',
     },
     questionButton: {
-      width: '5rem',
-      height: '5rem',
+      width: '60rem',
+      height: '60rem',
     },
     resultText: {
       color: '#76BA1B',
-      fontSize: '2rem',
+      fontSize: '10rem',
       fontWeight: '600',
-      paddingHorizontal: '2rem',
+      paddingHorizontal: '1%',
       textAlign: 'center',
-      marginTop: '2rem',
-      marginLeft: '1.5rem',
+      marginLeft: '2%',
     },
     nextContainer: {
       flexDirection: 'row', 
       justifyContent: 'flex-end',
-      marginTop: '2rem',
-      marginLeft: '2rem',
+      marginLeft: '5%',
     },
     nextButton: {
-      width: '3rem',
-      height: '3rem',
+      width: '60rem',
+      height: '60rem',
     },
 });

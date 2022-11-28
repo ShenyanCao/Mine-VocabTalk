@@ -44,20 +44,19 @@ const Dashboard = ({ navigation }) => {
   });
 
   return (
-    <View  style={styles.mainContainer}>
-      <View style={styles.menuContainer}>
-        <Pressable
-          onPress={() => navigation.navigate('Setting')} >
+    <View style={styles.mainContainer}>
+      <Pressable
+          onPress={() => navigation.navigate('Setting')} 
+          style={styles.menuContainer}>
           <Image source={require('../../assets/settings.png') } style={styles.settingImage}/>
-        </Pressable>
-      </View>
+      </Pressable>
     <FlatGrid
-      itemDimension={130}
+      itemDimension={150}
       data={empList}
       style={styles.gridView}
-      // staticDimension={300}
-      // fixed
-      spacing={20}
+      adjustGridToStyles={true}
+      maxItemsPerRow={4}
+      spacing={10}
       renderItem={({ item }) => (
         <View style={[styles.itemContainer]}>
           <Pressable
@@ -87,31 +86,31 @@ const styles = EStyleSheet.create({
   menuContainer: {
     flexDirection: 'row', 
     justifyContent: 'flex-end',
-    marginTop: '1rem',
-    marginRight: '2rem',
+    marginTop: '5%',
+    marginRight: '5%'
   },
   settingImage: {
-    width: '3rem',
-    height: '3rem',
+    width: '30rem',
+    height: '30rem',
   },
   gridView: {
-    marginLeft: '1rem',
-    marginRight: '1rem',
+    flex: 1,
+    marginTop: '2%',
+    marginLeft: '3%',
+    marginRight: '3%',
   },
   itemContainer: {
-    justifyContent: 'space-evenly',
-    paddingTop: '1rem',
-    height: '8rem',
-    width: '8rem',
+    justifyContent: 'flex-end', 
+    paddingTop: '1%',
   },
   itemName: {
-    fontSize: '0.8rem',
+    fontSize: '14rem',
     fontWeight: '600',
-    paddingTop: '0.5rem',
+    paddingTop: '1%',
     textAlign: 'center',
   },
   categoryImage: {
-    width: '7rem',
-    height: '7rem',
+    width: '150rem',
+    height: '150rem',
   }
 });

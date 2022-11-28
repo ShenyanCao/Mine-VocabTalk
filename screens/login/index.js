@@ -9,7 +9,7 @@ import { Base64 } from 'js-base64';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 var db = SQLite.openDatabase('UserDatabase.db');
-const ICON_SIZE = 100;
+const ICON_SIZE = '50rem';
 
 const Login = ({ navigation }) => {
 
@@ -112,7 +112,7 @@ const Login = ({ navigation }) => {
     // alert("email valid");
     var encode = Base64.encode(password);
     console.log(login_data, encode);
-    if (email !== "admin@123.com" && (login_data === null || login_data.password !== encode)) {
+    if (login_data === null || login_data.password !== encode) {
       setPasswordError("Email or password incorrect!");
       return;
     } 
@@ -120,7 +120,7 @@ const Login = ({ navigation }) => {
     // alert("password valid");
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Dashboard', params: { user: login_data === null ? "admin@123.com" : login_data.email}}],
+      routes: [{ name: 'Dashboard', params: { user: login_data.email}}],
     });
   };
 
@@ -185,18 +185,17 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
   },
   welcomeText: {
-    textAlign: 'center',
     color: '#1DC5BB',
-    fontSize: '2rem',
+    fontSize: '25rem',
     fontWeight: '700',
-    marginTop: '3rem',
-    marginBottom: '1rem',
+    marginTop: '3%',
+    marginBottom: '2%',
   },
   photo: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: '0.5rem',
-    marginTop: '0.5rem',
+    marginBottom: '2%',
+    marginTop: '1%',
   },
   profile: {
     width: ICON_SIZE,
@@ -205,30 +204,31 @@ const styles = EStyleSheet.create({
   },
   errorText: {
     color: '#EB5053',
-    fontSize: '0.7rem',
+    fontSize: '12rem',
     fontWeight: 'normal',
-    paddingHorizontal: '0.9rem',
+    paddingHorizontal: '2rem',
     textAlign: 'center',
+    marginBottom: '1%',
   },
   textBox: {
-    width: '16rem',
+    width: '60%',
     alignSelf: 'center',
-    marginTop: '0.5rem',
-    marginBottome: '0.5rem',
+    marginTop: '0.5%',
+    marginBottome: '0.5%',
   },
   loginButton: {
-    width: '10rem',
+    width: '30%',
     alignSelf: 'center',
-    marginTop: '0.5rem',
-    marginBottome: '0.5rem',
+    marginTop: '3%',
+    marginBottom: '1%'
   },
   signupButton: {
     color: '#000000',
     textAlign: 'center',
-    fontSize: '1rem',
+    fontSize: '13rem',
     fontWeight: 'normal',
-    marginBottom: '2rem',
-    marginTop: '2rem',
+    marginTop: '15%',
+    marginBottom: '1%'
   },
 });
 

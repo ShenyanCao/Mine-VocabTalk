@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Pressable, Share} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
+import LogoutButton from '../../components/AppButton';
 
 var db = SQLite.openDatabase('UserDatabase.db');
 
@@ -53,21 +54,22 @@ const Setting = ({ navigation }) => {
         <View  style={styles.mainContainer}>
              <Pressable
                 onPress={onShare} 
-                style={{width: '100%'}}>
-                <View style={styles.ButtonBackground}>
-                <Text style={styles.button}>Sharing</Text>
-                </View>
+                style={styles.shareButtonBackground}>
+                <Text style={styles.shareButton}>Sharing with others</Text>
             </Pressable>
+
+            <View  style={styles.feedbackContainer}>
+              <Text style={styles.feedbackMain}>Help or feedback:</Text>
+              <Text style={styles.feedbackEmail}>sycao@uw.edu:</Text>
+            </View>
 
             <Pressable
                 onPress={() => navigation.reset({
                 index: 0,
                 routes: [{ name: 'Login'}],
                 })}
-                style={{width: '100%'}}>
-                <View style={styles.loginButtonBackground}>
-                <Text style={styles.button}>Logout</Text>
-                </View>
+                style={styles.logoutButtonBackground}>
+                <Text style={styles.logoutButton}>Logout</Text>
             </Pressable>
         </View>
     );
@@ -80,20 +82,55 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  loginButton: {
-    marginHorizontal: 32,
-    bottom: 18,
+  shareButton: {
+    color: 'black',
+    fontSize: '25rem',
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+    paddingVertical: '5rem',
   },
-  loginButtonBackground: {
-    width: '100%',
-    height: 70,
-    backgroundColor: 'tomato',
-    justifyContent: 'center',
+  shareButtonBackground: {
+    backgroundColor: 'white',
+    justifyContent: 'flex-start',
+    marginTop: '15%',
+    marginLeft: '5%',
+    marginBottom: '2%',
   },
-  button: {
+  feedbackContainer: {
+    backgroundColor: 'white',
+    justifyContent: 'flex-start',
+    marginTop: '5%',
+    marginLeft: '5%',
+    marginBottom: '2%',
+  },
+  feedbackMain: {
+    color: 'black',
+    fontSize: '25rem',
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+    paddingVertical: '5rem',
+  },
+  feedbackEmail: {
+    color: 'black',
+    fontSize: '18rem',
+    fontWeight: '400',
+    paddingVertical: '5rem',
+  },
+  logoutButton: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: '25rem',
     fontWeight: '600',
+    paddingVertical: '5rem',
   },
+  logoutButtonBackground: {
+    backgroundColor: 'tomato',
+    justifyContent: 'flex-start',
+    marginTop: '5%',
+    marginBottom: '2%',
+    marginLeft: '5%',
+    width: '40%',
+    borderRadius: '10rem',
+  },
+  
 });

@@ -5,9 +5,8 @@ import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 // define REM depending on screen width
-const {height} = Dimensions.get('window');
-const rem = parseInt(height * 18 / 900);
-
+const entireScreenWidth = Dimensions.get('window').width;
+const rem = entireScreenWidth / 380;
 
 import Login from './screens/login/index';
 import SignUp from './screens/signup/index';
