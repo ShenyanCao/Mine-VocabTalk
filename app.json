@@ -19,6 +19,7 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "requireFullScreen": true,
       "bundleIdentifier": "com.jakegejun.AwesomeProject",
       "buildNumber": "1.0.0"
     },
@@ -40,14 +41,14 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The photo access to allow you change profile photo."
+          "photosPermission": "Allow this app to access your photo library to change profile photo."
         }
       ],
       [
         "@react-native-voice/voice",
         {
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
-          "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
+          "microphonePermission": "Allow this app to access your microphone",
+          "speechRecogntionPermission": "Allow this app to securely recognize user speech"
         }
       ]
     ],

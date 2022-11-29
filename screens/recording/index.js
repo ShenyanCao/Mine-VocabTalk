@@ -11,13 +11,14 @@ import Voice, {
 
 const Recording = ({ navigation }) => {
     const route = useRoute();
-    const [item, setItem] = useState(route.params.current)
-    const [index, setIndex] = useState(route.params.index)
-    const [items, setItems] = useState(route.params.items)
+    const [item, setItem] = useState(route.params.current);
+    const [index, setIndex] = useState(route.params.index);
+    const [items, setItems] = useState(route.params.items);
     const [results, setResults] = useState([]);
     const [isListening, setIsListening] = useState(false);
 
     function askquestion (thingToSay) {
+      Speech.stop();
       console.log("speaking words:" + thingToSay);
       Speech.speak(thingToSay, {
         language: 'en-US',
@@ -29,45 +30,61 @@ const Recording = ({ navigation }) => {
         askquestion(thingToSay);
     };
 
-    useEffect(() => {
-        function onSpeechResults(e) {
-          setResults(e.value ?? []);
-          console.log("You said word: " + results[0]);
-          if(String(results[0]).trim().toLowerCase() === item.pictureWord) {
-            askquestion("well done");
-          } else {
-            askquestion("try again, or Help");
-          }
-        }
-        function onSpeechError(e) {
-          console.log(e);
-        }
-        Voice.onSpeechError = onSpeechError;
-        Voice.onSpeechResults = onSpeechResults;
-        return function cleanup() {
-          Voice.destroy().then(Voice.removeAllListeners);
-        };
-    }, []);
-    
-    async function record() {
-        try {
-          if (isListening) {
-            await Voice.stop();
-            setIsListening(false);
-          } else {
-            setResults([]);
-            await Voice.start("en-US");
-            setIsListening(true);
-          }
-        } catch (e) {
-          console.error(e);
-        }
+    function askPicture () {
+      const thingToSay = "Do you know what is this? Click recording to record your answer or click question button for help";
+      askquestion(thingToSay);
+  };
+
+  useEffect(() => {
+    function onSpeechResults(e) {
+      setResults(e.value ?? []);
     }
+    function onSpeechError(e) {
+      console.log(e);
+    }
+    Voice.onSpeechError = onSpeechError;
+    Voice.onSpeechResults = onSpeechResults;
+    return function cleanup() {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+}, []);
+
+useEffect(() => {
+  var words = results.length > 0 ? results.map(e => e ?? "").join('') : "";
+  if (String(words).toLowerCase().indexOf(item.pictureWord) !== -1){
+    askquestion("well done");
+    Voice.stop();
+    setIsListening(false);
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Recording', params: { current: items[index+1], index:  (index < (items.length - 2)) ? index+1 : 0, items: items}}],
+    })
+  } else if (String(words).length > 0 && !isListening) {
+    askquestion("try again, or Help");
+  }
+}, [results]);
+
+async function record() {
+  Speech.stop();
+  try {
+    if (isListening) {
+      await Voice.stop();
+      setIsListening(false);
+    } else {
+      setResults([]);
+      await Voice.start("en-US");
+      setIsListening(true);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
 
     return (
         <View style={styles.mainContainer}>
           <Pressable
-            onPress={() => navigation.reset({
+            onPress={() => Speech.stop() && navigation.reset({
                       index: 0,
                       routes: [{ name: 'Dashboard'}],
                     })}
@@ -76,13 +93,19 @@ const Recording = ({ navigation }) => {
           </Pressable>
            
           <View style={styles.itemImageContainer}>
-            <Image source={{url: item.pictureURL}} style={styles.itemImage} />
+            <Pressable
+              onPress={askPicture}>
+              <Image source={{url: item.pictureURL}} style={styles.itemImage} />
+            </Pressable>
           </View>
           
+
           <Pressable
             onPress={record}
             style={styles.recordContainer}>
             <Image source={isListening ? require('../../assets/recording.png') : require('../../assets/record.png') } style={styles.recordButton} />
+          
+           
           </Pressable>
 
           <View style={styles.bottomPart}>      
@@ -92,20 +115,19 @@ const Recording = ({ navigation }) => {
               <Image source={require('../../assets/question.png') } style={styles.questionButton} />
             </Pressable>
             
-            <Text style={styles.resultText}>Results: {results[0]}</Text>
-            {(index < items.length - 1) ?
+           
             <Pressable
               onPress={() => navigation.reset({
                   index: 0,
-                  routes: [{ name: 'Recording', params: { current: items[index+1], index: index+1, items: items}}],
+                  routes: [{ name: 'Recording', params: { current: items[index+1], index:  (index < (items.length - 2)) ? index+1 : 0, items: items}}],
                 })}
               style={styles.nextContainer}>
               <Image source={require('../../assets/next.png') } style={styles.nextButton} />
             </Pressable>
-            : 
-            <View></View>
-            }
+
           </View>
+          
+          <Text style={styles.resultText}>{results[0]}</Text>
         </View>
     );
 };
@@ -134,8 +156,8 @@ const styles = EStyleSheet.create({
   },
     itemImage: {
       alignSelf: 'center',
-      width: '300rem',
-      height: '300rem',
+      width: '250rem',
+      height: '250rem',
     },
     recordContainer: {
       flexDirection: 'row', 
@@ -143,8 +165,8 @@ const styles = EStyleSheet.create({
       marginTop: '4%',
     },
     recordButton: {
-        width: '100rem',
-        height: '100rem',
+        width: '60rem',
+        height: '60rem',
     },
     bottomPart: {
       flexDirection: 'row',
@@ -153,13 +175,12 @@ const styles = EStyleSheet.create({
       marginLeft: '2%',
     },
     questionContainer: {
-      flexDirection: 'row', 
-      justifyContent: 'flex-start',
-      marginLeft: '2%',
+      width:'50%',
     },
     questionButton: {
-      width: '60rem',
       height: '60rem',
+      width: '60rem',
+      alignSelf: 'center',
     },
     resultText: {
       color: '#76BA1B',
@@ -170,12 +191,11 @@ const styles = EStyleSheet.create({
       marginLeft: '2%',
     },
     nextContainer: {
-      flexDirection: 'row', 
-      justifyContent: 'flex-end',
-      marginLeft: '5%',
+      width:'50%',
     },
     nextButton: {
-      width: '60rem',
       height: '60rem',
+      width: '60rem',
+      alignSelf: 'center',
     },
 });

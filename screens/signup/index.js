@@ -123,8 +123,8 @@ const SignUp = ({ navigation }) => {
 
     console.log(email, password, repeatPassword);
 
-    newrepeatPassword !== '' &&
-    newrepeatPassword !== undefined &&
+    newRepeatPassword !== '' &&
+    newRepeatPassword !== undefined &&
     email !== '' &&
     email !== undefined &&
     username !== '' &&
@@ -272,7 +272,7 @@ const SignUp = ({ navigation }) => {
           style={styles.textBox}
           onChangeText={val => handlePassword(val)}
           placeholder={'Enter your password'}
-          maxLength={28}
+          maxLength={40}
           secureEntry={true}
         />
         <Text style={styles.errorText}>{passwordError}</Text>
@@ -281,7 +281,7 @@ const SignUp = ({ navigation }) => {
           style={styles.textBox}
           onChangeText={val => handleRepeatPassword(val)}
           placeholder={'Repeat your password'}
-          maxLength={28}
+          maxLength={40}
           secureEntry={true}
         />
         <Text style={styles.errorText}>{repeatPasswordError}</Text>

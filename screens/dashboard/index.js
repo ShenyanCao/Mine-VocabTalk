@@ -4,7 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 import { FlatGrid } from 'react-native-super-grid';
-// import CachedData from '../../constants/cached_data';
+import CachedData from '../../constants/cached_data';
 
 const URL = 'https://gist.githubusercontent.com/ShenyanCao/5691099b520203f2da2fa964db39d5d5/raw/db.json';
 
@@ -100,17 +100,18 @@ const styles = EStyleSheet.create({
     marginRight: '3%',
   },
   itemContainer: {
-    justifyContent: 'flex-end', 
+    justifyContent: 'space-evenly', 
     paddingTop: '1%',
   },
   itemName: {
-    fontSize: '14rem',
+    fontSize: '13rem',
     fontWeight: '600',
     paddingTop: '1%',
     textAlign: 'center',
   },
   categoryImage: {
-    width: '150rem',
-    height: '150rem',
+    width: '80rem',
+    height: '80rem',
+    alignSelf: 'center',
   }
 });
