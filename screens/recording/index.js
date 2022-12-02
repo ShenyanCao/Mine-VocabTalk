@@ -104,8 +104,7 @@ async function record() {
             onPress={record}
             style={styles.recordContainer}>
             <Image source={isListening ? require('../../assets/recording.png') : require('../../assets/record.png') } style={styles.recordButton} />
-          
-           
+
           </Pressable>
 
           <View style={styles.bottomPart}>      
@@ -119,7 +118,7 @@ async function record() {
             <Pressable
               onPress={() => navigation.reset({
                   index: 0,
-                  routes: [{ name: 'Recording', params: { current: items[index+1], index:  (index < (items.length - 2)) ? index+1 : 0, items: items}}],
+                  routes: [{ name: 'Recording', params: { current: (index < (items.length - 2)) ? items[index+1] : items[0], index:  (index < (items.length - 2)) ? index+1 : 0, items: items}}],
                 })}
               style={styles.nextContainer}>
               <Image source={require('../../assets/next.png') } style={styles.nextButton} />

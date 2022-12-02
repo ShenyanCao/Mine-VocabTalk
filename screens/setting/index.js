@@ -62,7 +62,7 @@ const Setting = ({ navigation }) => {
               <Text style={styles.feedbackMain}>Help or feedback:</Text>
               <Text style={styles.feedbackEmail}>sycao@uw.edu:</Text>
             </View>
-
+            
             <Pressable
                 onPress={() => navigation.reset({
                 index: 0,

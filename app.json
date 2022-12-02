@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AwesomeProject",
-    "slug": "AwesomeProject",
+    "name": "VocabTalk",
+    "slug": "VocabTalk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "requireFullScreen": true,
-      "bundleIdentifier": "com.jakegejun.AwesomeProject",
+      "bundleIdentifier": "com.shenyan.VocabTalk",
       "buildNumber": "1.0.0"
     },
     "android": {
@@ -31,7 +31,7 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.jakegejun.AwesomeProject",
+      "package": "com.shenyan.VocabTalk",
       "versionCode": 1
     },
     "web": {

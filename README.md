@@ -2,9 +2,7 @@
 # **VocabTalk**
 *Lilian Cao*
 
-*Check Point 3 - Basic Functionality "Alpha"*
-
-# Part 1: Updated Project Plan
+# Part 1: Project Plan
 ## Summary of Project
 It is crucial that children have explicit and robust instruction in vocabulary, to support their verbal and written communication. The existing apps in current market usually will let little kids view several pictures and meanwhile play a word sound to them, then ask them to select the correct picture that corresponds to the word they heard. These exsitng apps helps little kids build up vocabulary and enhance their listening skills, but not oral skills. Our new app will show little kids a picture and ask them to tell what it is. If they cannot speak out the correct word, they can hear the correct pronunciation of the word to learn from it. Our new app will not only help little kids build up vocabulary and enhance listening skills, but also improve their oral language skills. A survey shows that 43% of U.S. kids often use educational apps <sup>1</sup>, so there will be a big market for our educational game app.
 
@@ -97,7 +95,7 @@ The overall design will base on MVC architecture.
 
 5) **Interaction with other apps on the same device:** If kids want to share their learning progress report with others via other apps on the same device, how will this app interact with other apps on the same device? React Native has an inbuilt share package, which can be useful to solve this challenge.
 
-# Part 2: Checkpoint 2 - Simple prototype
+# Part 2: Simple prototype
 
 ## 1. Prototype animation via this link:
 https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A13
@@ -181,7 +179,7 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
 
 
 
-# Part 3: Demo of basic functionality and state management
+# Part 3: Demo of functionality and state management
 
 ## Demo:
 (https://youtube.com/shorts/JCejlYXZB3o?feature=share)
