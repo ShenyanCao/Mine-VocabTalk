@@ -65,10 +65,10 @@ const SignUp = ({ navigation }) => {
 
     repeatPassword !== '' &&
     repeatPassword !== undefined &&
-    username !== '' &&
-    username !== undefined &&
     emailAddress !== '' &&
     emailAddress !== undefined &&
+    username !== '' &&
+    username !== undefined &&
     password !== '' &&
     password !== undefined &&
     password === repeatPassword
@@ -77,7 +77,7 @@ const SignUp = ({ navigation }) => {
   };
 
   function handleUsername(name) {
-    console.log('username= ', name);
+    console.log('name= ', name);
     name = name.trim();
     setUsername(name);
     if (!validateUsername(name)) {
@@ -110,9 +110,9 @@ const SignUp = ({ navigation }) => {
     email !== undefined &&
     username !== '' &&
     username !== undefined &&
-    newPassword !== '' &&
-    newPassword !== undefined &&
-    newPassword === repeatPassword
+    newpassword !== '' &&
+    newpassword !== undefined &&
+    newpassword === repeatPassword
       ? setStatus(true) && setRepeatPasswordError("")
       : setStatus(false) && setRepeatPasswordError("Please make sure the passwords are the same!");
   };
@@ -143,21 +143,17 @@ const SignUp = ({ navigation }) => {
     const result = validateEmail(email);
     if (!result) {
       setEmailError('Invalid Email');
-      return;
     }
 
-    // with valid email, then encrypt password
+    // valid email
     var encode = Base64.encode(repeatPassword);
-
-    if(photo === null || photo === ''){
-      setPhoto('../../assets/Hamster.png');
-    }
 
     const resizedPhoto = await ImageManipulator.manipulateAsync(
       photo,
       [{ resize: { width: 1000, height: 1000} }],
       { compress: 0.7, format: 'jpeg' },
-    ); 
+    );
+    // alert("photo valid");
 
     console.log(email, username, password, encode, resizedPhoto.uri);
     // alert("log valid");
@@ -269,7 +265,6 @@ const SignUp = ({ navigation }) => {
           style={styles.textBox}
           onChangeText={val => handleUsername(val)}
           placeholder={'Enter your child\'s name'}
-          maxLength={40}
         />
         <Text style={styles.errorText}>{usernameError}</Text>
 
