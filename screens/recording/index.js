@@ -3,14 +3,19 @@ import { useEffect } from 'react';
 import {StyleSheet, Text, Pressable, View, Image} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import * as Speech from 'expo-speech';
+import * as SQLite from 'expo-sqlite';
 import { useRoute } from '@react-navigation/native';
 import Voice, {
     SpeechResultsEvent,
     SpeechErrorEvent,
   } from "@react-native-voice/voice";
 
+var db = SQLite.openDatabase('UserDatabase.db');
+
 const Recording = ({ navigation }) => {
     const route = useRoute();
+    const user_id = route.params.user_id;
+    const cat_id = route.params.cat_id;
     const [item, setItem] = useState(route.params.current);
     const [index, setIndex] = useState(route.params.index);
     const [items, setItems] = useState(route.params.items);
@@ -31,7 +36,7 @@ const Recording = ({ navigation }) => {
     };
 
     function askPicture () {
-      const thingToSay = "Do you know what is this? Click recording to record your answer or click question button for help";
+      const thingToSay = "What is this?";
       askquestion(thingToSay);
   };
 
@@ -56,10 +61,26 @@ useEffect(() => {
     Voice.stop();
     setIsListening(false);
 
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Recording', params: { current: items[index+1], index:  (index < (items.length - 2)) ? index+1 : 0, items: items}}],
-    })
+    db.transaction(function (tx) {
+      tx.executeSql(
+        'INSERT or IGNORE INTO table_user_progress (user_id, cat_id, word_id, word) VALUES (?,?,?,?)',
+        [user_id, cat_id, item.pictureID, item.pictureWord],
+        (tx, results) => {
+          console.log('Results', results.rowsAffected);
+          // alert("db valid");
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Recording', params: { user_id: user_id, cat_id: cat_id, current: items[index < items.length - 1 ? index+1 : 0], index:  index < items.length - 1 ? index+1 : 0, items: items}}],
+          });
+        },
+        (error) => {
+            console.log("execute error: " + JSON.stringify(error))
+            alert(JSON.stringify(error));
+        }
+      );
+    });
+
+    
   } else if (String(words).length > 0 && !isListening) {
     askquestion("try again, or Help");
   }
@@ -86,7 +107,7 @@ async function record() {
           <Pressable
             onPress={() => Speech.stop() && navigation.reset({
                       index: 0,
-                      routes: [{ name: 'Dashboard'}],
+                      routes: [{ name: 'Dashboard', params: {user_id: user_id}}],
                     })}
             style={styles.homeContainer}>
             <Image source={require('../../assets/home.png') } style={styles.homeButton} />
@@ -95,7 +116,7 @@ async function record() {
           <View style={styles.itemImageContainer}>
             <Pressable
               onPress={askPicture}>
-              <Image source={{url: item.pictureURL}} style={styles.itemImage} />
+              <Image source={ {url: item.pictureURL}} style={styles.itemImage} />
             </Pressable>
           </View>
           
@@ -104,8 +125,6 @@ async function record() {
             onPress={record}
             style={styles.recordContainer}>
             <Image source={isListening ? require('../../assets/recording.png') : require('../../assets/record.png') } style={styles.recordButton} />
-          
-           
           </Pressable>
 
           <View style={styles.bottomPart}>      
@@ -113,18 +132,15 @@ async function record() {
               onPress={speak}
               style={styles.questionContainer}>
               <Image source={require('../../assets/question.png') } style={styles.questionButton} />
-            </Pressable>
-            
-           
+            </Pressable>  
             <Pressable
               onPress={() => navigation.reset({
                   index: 0,
-                  routes: [{ name: 'Recording', params: { current: items[index+1], index:  (index < (items.length - 2)) ? index+1 : 0, items: items}}],
+                  routes: [{ name: 'Recording', params: { user_id: user_id, cat_id: cat_id, current: items[index < items.length - 1 ? index+1 : 0], index: index < items.length - 1 ? index+1 : 0, items: items}}],
                 })}
               style={styles.nextContainer}>
               <Image source={require('../../assets/next.png') } style={styles.nextButton} />
             </Pressable>
-
           </View>
           
           <Text style={styles.resultText}>{results[0]}</Text>
@@ -171,7 +187,7 @@ const styles = EStyleSheet.create({
     bottomPart: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      marginTop: '5%',
+      marginTop: '3%',
       marginLeft: '2%',
     },
     questionContainer: {
@@ -185,8 +201,7 @@ const styles = EStyleSheet.create({
     resultText: {
       color: '#76BA1B',
       fontSize: '10rem',
-      fontWeight: '600',
-      paddingHorizontal: '1%',
+      fontWeight: '500',
       textAlign: 'center',
       marginLeft: '2%',
     },
@@ -195,7 +210,7 @@ const styles = EStyleSheet.create({
     },
     nextButton: {
       height: '60rem',
-      width: '60rem',
+      width: '80rem',
       alignSelf: 'center',
     },
 });

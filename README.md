@@ -66,11 +66,11 @@ Similar to the existing MyVocabulary app, our new app will group words in differ
 - Then user can view dashboard, where they can choose to learn from different categories or click navigation menu button to see progress report or log out the account.
 
 
-3) **Kids Task Flow (Happy Path)**
+3) **Task Flow (Happy Path)**
 - Below is the task flow (happy path) of young kids:
-![This is an image](/images/TaskFlow2.jpg)
+![This is an image](/images/TaskFlow.jpg)
 
-- The account information of young kids would be stored in a local database. For most of the time, when young kids open the app, they would directly be able to access the dashboard and can choose to learn from a category. Then they would see a picture and hear the app asking them to record the pronunciation of the word that corresponds with the picture. With correct answer, they would see the next picture.
+- When young kids open the app, they will log into their account or ask their parents to help them log in. Then they would directly be able to access the dashboard and can choose to learn from a category. Then they would see a picture and hear the app asking them to record the pronunciation of the word that corresponds with the picture. With correct answer, they would see the next picture.
 
 
 ### Technical Architecture

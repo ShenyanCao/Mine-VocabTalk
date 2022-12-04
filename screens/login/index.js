@@ -34,6 +34,38 @@ const Login = ({ navigation }) => {
     });
   }, []);  // runs on first render
 
+  useEffect(() => {
+    db.transaction(function (txn) {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='table_user_progress'",
+        [],
+        function (tx, res) {
+          console.log('item:', res.rows.length);
+          if (res.rows.length == 0) {
+            txn.executeSql('DROP TABLE IF EXISTS table_user_progress', []);
+            txn.executeSql(
+              'CREATE TABLE IF NOT EXISTS table_user_progress(progress_id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, cat_id VARCHAR(100), word_id VARCHAR(100), word VARCHAR(100))',
+              []
+            );
+            txn.executeSql("CREATE UNIQUE INDEX table_user_progress_user_cat_word on table_user_progress ( user_id, cat_id, word_id )" ,[]);
+            console.log('table table_user_progress created');
+          } else {
+            console.log('table table_user_progress already exists');
+          }
+        },
+        (error) => {
+            console.log("execute error: " + JSON.stringify(error))
+            alert(JSON.stringify(error));
+        }
+      );
+    },
+    (error) => {
+      alert(JSON.stringify(error));
+    },
+    () => console.log("TRANSACTION DONE")
+    );
+  }, []);  // runs on first render
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -104,7 +136,7 @@ const Login = ({ navigation }) => {
       return;
     }
     const result = validateEmail(email);
-    if (!result) {
+    if (!result || login_data === undefined) {
       setEmailError('Invalid Email');
       return;
     }
@@ -120,7 +152,7 @@ const Login = ({ navigation }) => {
     // alert("password valid");
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Dashboard', params: { user: login_data.email}}],
+      routes: [{ name: 'Dashboard', params: { user: login_data.email, user_id: login_data.user_id}}],
     });
   };
 

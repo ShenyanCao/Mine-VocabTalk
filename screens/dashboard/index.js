@@ -11,7 +11,9 @@ const URL = 'https://gist.githubusercontent.com/ShenyanCao/5691099b520203f2da2fa
 var db = SQLite.openDatabase('UserDatabase.db');
 
 const Dashboard = ({ navigation }) => {
-  const [empList, setList] = useState([]);
+  const route = useRoute();
+  const user_id = route.params.user_id;
+  const [empList, setList] = useState(CachedData);
   const [isLoading, setLoading] = useState(true);
   // alert("on dashboard.")
 
@@ -43,10 +45,50 @@ const Dashboard = ({ navigation }) => {
     }
   });
 
+  function nextWordRecording(item) {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM table_user_progress where user_id = ? and cat_id = ?',
+        [user_id, item.categoryID],
+        (tx, results) => {
+          var len = results.rows.length;
+          if (len > 0) {
+            console.log(results.rows.item(0));
+            var wordlist = [];
+            for (let i=0;i<len;i++) {
+              wordlist.push(results.rows.item(i).word_id);
+            }
+            var go_to_index = 0;
+            for (let i=0;i<item.categoryList.length;i++) {
+              if(!wordlist.includes(item.categoryList[i].pictureID)) {
+                go_to_index = i;
+                break;
+              }
+            }
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Recording', params: { user_id: user_id, cat_id: item.categoryID, current: item.categoryList[go_to_index], index: go_to_index, items: item.categoryList}}],
+            });
+          } else {
+            console.log("no progress for category " + item.categoryName);
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Recording', params: { user_id: user_id, cat_id: item.categoryID, current: item.categoryList[0], index: 0, items: item.categoryList}}],
+            });
+          }
+        },
+        (error) => {
+            console.log("execute error: " + JSON.stringify(error))
+            alert(JSON.stringify(error));
+        }
+      );
+    });
+  }
+
   return (
     <View style={styles.mainContainer}>
       <Pressable
-          onPress={() => navigation.navigate('Setting')} 
+          onPress={() => navigation.navigate('Setting', {user_id: user_id, data: empList})} 
           style={styles.menuContainer}>
           <Image source={require('../../assets/settings.png') } style={styles.settingImage}/>
       </Pressable>
@@ -60,10 +102,7 @@ const Dashboard = ({ navigation }) => {
       renderItem={({ item }) => (
         <View style={[styles.itemContainer]}>
           <Pressable
-            onPress={() => navigation.reset({
-                      index: 0,
-                      routes: [{ name: 'Recording', params: { current: item.categoryList[0], index: 0, items: item.categoryList}}],
-                    })}
+            onPress={() => nextWordRecording(item)}
             style={{width: '100%'}}>
             <Image source={{url: item.categoryImage}} style={styles.categoryImage} />
           </Pressable>
@@ -101,17 +140,18 @@ const styles = EStyleSheet.create({
   },
   itemContainer: {
     justifyContent: 'space-evenly', 
-    paddingTop: '1%',
+    marginTop:'2%',
   },
   itemName: {
-    fontSize: '13rem',
-    fontWeight: '600',
-    paddingTop: '1%',
+    fontSize: '14rem',
+    fontWeight: '500',
+    marginTop: '2%',
+    marginBottom: '5%',
     textAlign: 'center',
   },
   categoryImage: {
-    width: '80rem',
-    height: '80rem',
+    width: '85rem',
+    height: '85rem',
     alignSelf: 'center',
   }
 });
