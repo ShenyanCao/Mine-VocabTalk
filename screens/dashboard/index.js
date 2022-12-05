@@ -18,6 +18,12 @@ const Dashboard = ({ navigation }) => {
   // alert("on dashboard.")
 
   console.log('rendered...');
+
+  useEffect(() => {
+    // setting default 
+    setList(CachedData);
+  });
+
   useEffect(() => {
     if (isLoading) {
       setLoading(true);

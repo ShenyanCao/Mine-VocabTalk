@@ -160,15 +160,19 @@ const SignUp = ({ navigation }) => {
     // valid email
     var encode = Base64.encode(repeatPassword);
 
+    photo_url = photo;
+
     if (photo === '' || photo === undefined) {
       var photo_url = DEFAULT_PHOTO;
-    } else {
-      const resizedPhoto = await ImageManipulator.manipulateAsync(
-        photo,
-        [{ resize: { width: 1000, height: 1000} }],
-        { compress: 0.7, format: 'jpeg' },
-      );
-      var photo_url = resizedPhoto.url;
+    // } else {
+    //   console.log(photo)
+    //   const resizedPhoto = await ImageManipulator.manipulateAsync(
+    //     photo,
+    //     [{ resize: { width: 200, height: 200} }],
+    //     { compress: 0.7, format: 'jpeg' },
+    //   );
+    //   var photo_url = resizedPhoto.url;
+    //   console.log(photo_url)
     }
     // alert("photo valid");
 
