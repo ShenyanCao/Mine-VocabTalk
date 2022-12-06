@@ -3,40 +3,40 @@
 *Lilian Cao*
 
 # Part 1: Project Design
-## 1. Summary of Project
+## Summary of Project
 It is crucial that children have explicit and robust instruction in vocabulary, to support their verbal and written communication. The existing apps in current market usually will let little kids view several pictures and meanwhile play a word sound to them, then ask them to select the correct picture that corresponds to the word they heard. These exsitng apps helps kids build up vocabulary and enhance their listening skills, but not oral skills. Our new app will show kids a picture and ask them to tell what it is. If they cannot speak out the correct word, they can hear the correct pronunciation of the word to learn from it. Our new app will not only help little kids build up vocabulary and enhance listening skills, but also improve their oral language skills. A survey shows that 43% of U.S. kids often use educational apps <sup>1</sup>, so there will be a big market for our educational game app.
 
 
-## 2. Project Analysis
-### 2.1. Target Audience
+## Project Analysis
+### Target Audience
 Once kids can talk, they are ready to fast expand their vocabulary. **Our target audience are kids that are over 4 years old and ready to talk**. Traditionally, little kids are educated with flashcards, our app is like interactive digital flashcards, so they will be interested in using our interactive app to learn new things. 
 
 The first step to reach the audience is by introducing and discussing the app with preschool students in the neighbourhood. Then I plan to introduce the app in social media, like Facebook.
 
-### 2.2. Primary Purpose
+### Primary Purpose
 A strong vocabulary is critical to language development. The idea of our vocabulary educational app for little kids is to encourage them to speak out new words, developing their oral language and vocabulary skills in a fun and interactive way.
 
-### 2.3. Value Proposition
+### Value Proposition
 Vocabulary is one of the early literacy skills that researchers say is important for children to have in order to learn to read<sup>2</sup>. The more vocabulary children have, the easier it will be for them to understand
 what they are reading. However, vocabulary remains one of the most difficult skills to teach <sup>3</sup>. Research has also shown that early childhood teachers spend an average of only five minutes per day explicitly developing oral language and vocabulary skills<sup>3</sup>, which leaves little opportunity to engage kids inconversations that can promote vocabulary development. At home, parents can use traditional flashcards to help little kids expand their vocabulary, but it takes a lot of time and effort. The problem that little kids tend to have limited exposure to vocabulary-enhancing activities at home or in educational settings has led me to the idea to develop this new app. Little kids can have interative ways to learn vocabulary from our app and talk to our app to show that they know the words. They can develop their vocabulary and oral skills at the same time. Beside, teachers and parents can save time in teaching and communicating with kids.
 
-### 2.4. Success Criteria
+### Success Criteria
 1) Little kids can easily use the app to expand their vocabulary and improve oral communication skills.
 2) Parents can easily track their kids' learning progress.
 3) Littile kids are interested in using the app.
 4) The app can be used without interent connection.
 
-### 2.5. Competitor Analysis
+### Competitor Analysis
 The existing MyVocabulary app is one of our competitor, who has about 2K ratings. It was developed by An Banh. In this app, words are grouped in different categories, like fruits, animals, vegetables and so on. For each word, the app would show several pictures and ask kids to select the correct one. This app helps little kids build up vocabulary and enhance their listening skills. This app is easy to use and includes thousands of words across 30+ levels. Kids needs to pass certain levels to unlock new levels and track their progress. The game mechanics would make kids want to keep learning. And no internet connection is required to play.
 
 Similar to the existing MyVocabulary app, our new app will group words in different categories. But the interative method for each word will be different. Our app will show a picture to the kids, ask them to tell what it is. If they know the correct answer, they will see the next picture and learn next word. If their answer is wrong, kids can choose to try again or listen to the correct answer. If they do not know the answer, they can listen to the correct pronunciation before recording. Compared to MyVocabulary app, our app will not only help kids develop vocabulary and listening skills, but also oral skills. Besides, in our app, kids will have the right to choose any category to work on. Compared to MyVocabulary app, kids will have more freedom to choose what to work on based on their best interest when using our app.
 
 
-### 2.6. Monetization Model
+### Monetization Model
 - Advertisement
 - In-app purchase if want customers want to remove advertisement.
 
-### 2.7. Initial Design
+### Initial Design
 **MVP:**
 - P0 - Young kids should be able to view a list of categories and choose one from the list.
 - P0 - Young kids should be able to view one picture at a time via the app, and tell the app what it is. If their answer is correct, the kids can view the next picture. If their answer is wrong, the kids can choose to try again or listen to the correct answer.
@@ -49,7 +49,7 @@ Similar to the existing MyVocabulary app, our new app will group words in differ
 - It takes time to create contents for the app. Using pictures on the internet may encounter copyright issues.
 - Young kids typically pronunce words differently from adults. By 24 months (two years), 50 to 75% of their speech usually can be intelligible to familiar people. By 36 months (three years), 75 to 100% of their speech cound be intelligible to familiar people. By four years of age, a child should usually be understood, including by people who are unfamiliar to them<sup>4</sup>. So, it may be difficult for the app to check if the pronunciation of little kids (2 and 3 years) are correct or not.
 
-### 2.8. Initial UI/UX Design
+### Initial UI/UX Design
 
 **a) Screens**
 - There would be seven screens: Login screen, Sign up screen, Dashboard screen, Picture screen, Setting screen, report screen and share screen.
@@ -70,8 +70,8 @@ Similar to the existing MyVocabulary app, our new app will group words in differ
 
 - When young kids open the app, they will log into their account or ask their parents to help them log in. Then they would directly be able to access the dashboard and can choose to learn from a category. Then they would see a picture and hear the app asking them to record the pronunciation of the word that corresponds with the picture. With correct answer, they would see the next picture.
 
-### 2.9. Technical Architecture Design
-The architecture diagram is shown as below:
+### Initial Technical Architecture Design
+The initial architecture design diagram is shown as below:
 ![This is an image](/images/Architecture.png)
 
 The overall design will base on MVC architecture.
@@ -83,7 +83,7 @@ The overall design will base on MVC architecture.
 - The word-picture contects would be stored in Gist as an online List database. The List Sync Controller will use API to interact with the online List database. The Category List Model will interact with List Sync Controller to syncronize the latest word-picture contects from online List database to the app.
 
 # Part 2: Simple prototype
-## 1. Prototype animation via this link:
+## Prototype animation via this link:
 https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A13
 
 - UI/UX Design are in accordance with the mockup in Part 1, with seven screens: Login screen, Sign up screen, Dashboard screen, Picture screen, Setting screen, report screen and share screen.
@@ -101,7 +101,7 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
    - On setting page, users can choose to log out account by clicking the log out button and they will be redirected to the login page.
 - Data to be stored and retrieved includes: profile picture, user email and password, category list, word-pictures, and learning progress data.
 
-## 2. Features and Tasks needed for the MVP:
+## Features and Tasks needed for the MVP:
 - Feature 1: The app should allow users to log in their accounts if they have exisitng accounts.
     * Task 1: Create user login page with textboxes for email and password, and a login button.
     * Task 2: Create readText method to read email and password text by user.
@@ -150,7 +150,7 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
     * Task 2: Create a cross button with onClick method on share page to redirect user from share page to setting page.
 
 
-## 3. Mapping between features and value(s) to be delivered by the app:
+## Mapping between features and value(s) to be delivered by the app:
 * Value 1: Young kids can use the app to expand their vocabulary and improve oral communication skills.
     - *Mapping* to Feature 4: The app should show users one picture at a time and test if they know the word that represented by the picture. If they do not know, the app should let users choose to listen to correct answer or again, or even pass to next question. If their answer is correct, then the app should show users the next picture in the list.
     - *Explanation*: Kids will see pictures from the app, and they need to tell the app what it is. If they know the correct answer, they will see the next picture and learn next word. If their answer is wrong, they can choose to try again or listen to the correct answer. If they do not know the answer, they can listen to the correct pronunciation before recording. In this way, kids can expand their vocabulary via a test-driven learning mode. Kids need to listen to questions and record their voice, which will help kids improve their oral skills.
@@ -165,53 +165,73 @@ https://www.figma.com/proto/MNPCXbX2Q3kodanS1HIrGZ/VocabTalk?node-id=2%3A13&scal
 
 
 # Part 3: Implementation
-## 1. Installation of the app
-    ## Language and Dev Platform
-    - **Language**: React Native
-    - **Dev Platform**: Mac OS
-    - **Running Platform**: iOS
-    - **Testing device:** iPad Air (4th generation)
+## Language and Dev Platform
+- **Language**: React Native
+- **Dev Platform**: Mac OS
+- **Running Platform**: iOS
+- **Testing device:** iPad Air (4th generation) and iPhone 11
 
-    ## Instructions to compile
-    - Follow [Expo EAS build instruction](https://docs.expo.dev/build/setup/) to build a ready-to-submit binary of this app for the Apple App Store.
-    - Android platform has not been tested or built yet, so I am not sure how it would work on Android platform.
+## Instructions to compile
+- Follow [Expo EAS build instruction](https://docs.expo.dev/build/introduction/) to build a ready-to-submit binary of this app for the Apple App Store, and run a build for internal distribution.
 
-## 2. UI/UX screens implemented
+## Functionality implemented:
+Basically all the functions and features designed during project planning phase has been implemented accordingly. Only the progress report part is a bit different from what was designed. The progress report is directly shown in setting page, and there is no progress report screen any more. 
 
-## 3. Functionality implemented:
-  - Sign up with state management:
-  - Login with state management:
-  - Dashboard navigate to setting page with state management:
-  - Setting page home button to navigate to Dashboard screen:
-  - Setting page with progress report and clear cache:
-  - Setting page with sharing:
-  - Setting page's logout button navigate to login screen:
-  - Dashboard navigate to Flash Card screen with state management:
-  - Flash Card screen recording, checking and navigate to next Flash Card screen:
-  - Flash Card screen question button to play sound:
-  - Flash Card screen next button to navigate to next Flash Card screen:
-  - Flash Card screen home button to navigate to Dashboard screen:
+Below are the details of functionality implemented:
+  - Sign up feature to sign up user account with / without user uploaded profile photo. (If user allows access permission to camera, he/she can take a photo from camera and upload to app as profile photo; if user allows access permission to photo library; he/she can choose a photo from photo library and upload to app as profile photo; if user denies access permission to camera and photo library, then default cat picture will be used as his/her profile photo.)
+  - Signup screen navigate to dashboard upon successful account signup; or can navigate back to login screen.
+  - Log in feature to verify user information and navigate to dashboard screen upon successful account login.
+  - Log in screen navigate to sign up screen.
+  - Dashboard navigate to setting screen.
+  - Setting screen navigate to Dashboard screen.
+  - Setting page with progress report and clear progress button to clear cache of user progress. 
+  - Setting page with sharing button to access other app in the same device to share information with others. 
+  - Setting page's logout button navigate to login screen.
+  - Dashboard has category item buttons which upon click will navigate to Flash Card screen.
+  - Flash Card screen has recording button to record user's audio message and then the app will perform speech recognition to check if user's input is correct or not. If correct, then the app will navigate to next Flash Card screen. If not correct, the app will play sound to ask user to try again or click question button for help. 
+  - The app will ask for permission to access microphone and speech recognition, so that the recording function can work as designed. If without perssions, then the recording function will not work. 
+  - Flash Card screen has the question button to play sound of the pronunciation of the word associate with the flash card picture. 
+  - Flash Card screen has the next button to navigate to next Flash Card screen, if user want to skip currect flash card and jump to the next card. 
+  - Flash Card screen has the home button to navigate to Dashboard screen, so that user can select to learn other catogories or choose to go to the setting screen.
+  - When user re-enters a certain category, the app will direct user to the first flash card in this category which he/she did not pass previously. 
+  - All data are fetched locally and the app is accessible without internet connection. 
+  - When there's internet connection, the app will fetch the remote database to get the lastest updated contents and show in this app. 
 
-## Demo:
-(https://youtube.com/shorts/JCejlYXZB3o?feature=share)
+## Demo with iPad and iPhone
+1) Demo with Ipad Air 4:
+(https://www.youtube.com/watch?v=3CwrsnWNLkM)
+2) Demo with Iphone 11:
+(https://www.youtube.com/watch?v=kyXiyhTP6Tc)
 
-
-## 3. Challenges solved
+## Challenges solved
 1) Date storage:
-
-2) Sensor usage and permissions:
-**Access/Usage of microphone sensor:** Our app will need to interact with kids by asking them questions, listening to their answers, and telling kids if their answers are correct or not. This leads to the need of accessing and using built-in sensors (microphone). This can be very challenging.
-
-3) No access to intenet (caching consideration):
-
-4) Security
-
-5) **Interaction with other apps on the same device:** If kids want to share their learning progress report with others via other apps on the same device, how will this app interact with other apps on the same device? React Native has an inbuilt share package, which can be useful to solve this challenge.
-
-6) Form factor:
-
-7) Cross-platform development:** Young kids may use different devices with different OS and different screen size. How could our app work across a wide range of devices? One possible solution is to use frameworks like React Native.
-
+    - User account information is stored in local SQlite database. 
+    - User progress information is stored in local SQlite database. 
+    - Flash card contents are stored remotely on Gist website, then cached locally in data.json file. 
+2) Sensor usage:
+    - Microphone: for recording feature.
+    - Camera: for profile uploading feature.
+3) Permissions:
+    - Microphone & Speech recognition permissions: the app will ask for user's permissions to access microphone and speech recognition, so that the app can record user's voice and then translate speech into text to verify if user's answers are correct. If user does not want to grant these two permissions, then the user cannot use the recording feature, but they can still have access to all other features. 
+    - Camera and Photo library access permissions: When signing up account, user can choose to upload a profile photo. If user wants to take a photo to upload as their profile, the app will ask for permission to access camera before letting user to use the camera. If user wants to choose any existing photo from photo library to upload as their profile, the app will ask for permission to access photo library before letting user to choose any existing photo. If user does not want to grant any permission to access camera or photo library, then their profile photo will be a default picture upon signup. 
+4) No access to intenet (caching consideration):
+    - All data are cached locally and the app is accessible without internet connection. 
+    - When there's internet connection, the app will fetch the remote database to get the lastest updated contents and show in this app. 
+    - When there's no internet connection, the app will load the local cached contents,
+5) Security and privacy:
+    - User password is encryped with Base64.
+    - User has the right to deny access permission to camera, photo library, microphone and/or speech recognition. Without these permissions, user can still use the app with limited functionality.
+6) Interaction with other apps on the same device:
+    - If user wants to share information with others via other apps on the same device, they can click the share button in setting screen to access other apps, such as what's app, email, message, and etc.
+7) Form factor:
+    - The app used _react-native-extended-stylesheet_ package to create styles for the app. The _rem_ unit makes it easy to scale the app depending on the device screen size. 
+    - Percent values relative to screen width/height are used to calculate margin values, text input width, and button width.
+    - Below is the picture showing the screens of *iPad Air 4* versus *iPhone 11*:
+    ![This is an image](/images/formsize.jpg)
+8) State management:
+    - I used React's useState and useEffect for local state management throughout the whole project.
+9) Cross-platform development:
+    - As react native can be used to create cross-platform application, theoretically we can build for Android and iOS at the same time. However, I do not have any Android device, so I did not try any build for Android at this moment. But there is still the potential to build the app for both iOS and Android with current code package.
 
 ## Reference
 
